@@ -88,7 +88,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\jonik\source\repos\POCO\poco\Foundation\include;C:\Users\jonik\source\repos\POCO\poco\Net\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\jonik\source\repos\POCO\poco\JSON\include;C:\Users\jonik\source\repos\POCO\poco\Foundation\include;C:\Users\jonik\source\repos\POCO\poco\Net\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -132,13 +132,20 @@
   <ItemGroup>
     <ClCompile Include="AtlantScanner.cpp" />
     <ClCompile Include="Authenticator.cpp" />
+    <ClCompile Include="AuthToken.cpp" />
+    <ClCompile Include="Detection.cpp" />
     <ClCompile Include="FileScanner.cpp" />
-    <ClCompile Include="TokenFetcher.cpp" />
+    <ClCompile Include="AuthTokenFetcher.cpp" />
+    <ClCompile Include="ScanResult.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="APIException.hpp" />
     <ClInclude Include="Authenticator.hpp" />
+    <ClInclude Include="AuthToken.hpp" />
+    <ClInclude Include="Detection.hpp" />
     <ClInclude Include="FileScanner.hpp" />
-    <ClInclude Include="TokenFetcher.hpp" />
+    <ClInclude Include="AuthTokenFetcher.hpp" />
+    <ClInclude Include="ScanResult.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

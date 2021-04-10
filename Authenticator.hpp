@@ -10,11 +10,12 @@
 class Authenticator {
 
 public:
-	Authenticator(const std::string &authorization_address,
+	Authenticator(
+		const std::string &authorization_address,
 		const std::string &client_ID,
 		const std::string &client_secret,
 		const std::set<std::string> &scopes);
-	AuthToken fetchToken(const std::string& URI);
+	AuthToken fetchToken();
 
 private:
 	std::unique_ptr<AuthTokenFetcher> token_fetcher;

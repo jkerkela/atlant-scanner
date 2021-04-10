@@ -5,7 +5,7 @@ namespace {
 	constexpr auto API_PREFIX = "/api/poll/v1";
 }
 
-FileScanner::FileScanner(const std::string& scanning_address, const Authenticator& authenticator) 
+FileScanner::FileScanner(const std::string& scanning_address, Authenticator& authenticator) 
 	: base_URI{ scanning_address },
 	scan_endpoint{ std::string(scanning_address + API_PREFIX) },
 	poll_endpoint{ std::string(scanning_address + API_PREFIX) },
@@ -19,6 +19,5 @@ FileScanner::FileScanner(const std::string& scanning_address, const Authenticato
 
 void FileScanner::refreshToken()
 {
-	//TODO: continue here
-	auth_token = authenticator.fetchToken(base_URI);
+	auth_token = authenticator.fetchToken();
 }

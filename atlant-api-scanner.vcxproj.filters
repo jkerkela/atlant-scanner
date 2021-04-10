@@ -21,10 +21,19 @@
     <ClCompile Include="FileScanner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TokenFetcher.cpp">
+    <ClCompile Include="Authenticator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Authenticator.cpp">
+    <ClCompile Include="AuthTokenFetcher.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AuthToken.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ScanResult.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Detection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,7 +44,19 @@
     <ClInclude Include="Authenticator.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TokenFetcher.hpp">
+    <ClInclude Include="AuthTokenFetcher.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AuthToken.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScanResult.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Detection.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="APIException.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

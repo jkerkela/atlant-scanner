@@ -24,21 +24,21 @@ namespace {
 }
 
 AuthTokenFetcher::AuthTokenFetcher(const std::string &authorization_address)
-	: client{ HTTPClientSession() }, token_endpoint{ std::string(API_PREFIX + authorization_address) }
+	: token_endpoint{ Poco::URI(authorization_address + std::string(API_PREFIX)) },
+	client{ std::make_unique<HTTPClientSession>(token_endpoint.getHost()) }
 {}
 
-AuthToken AuthTokenFetcher::fetch(const std::string &URI,
+AuthToken AuthTokenFetcher::fetch(
 	const std::string &client_ID,
 	const std::string &client_secret,
 	const std::set<std::string> &scopes)
 {
 	HTTPRequest tokenRequest = buildTokenRequest(client_ID, client_secret, scopes);
-	HTTPClientSession session(URI);
-	std::ostream& req_stream = session.sendRequest(tokenRequest);
+	std::ostream& req_stream = client->sendRequest(tokenRequest);
 	req_stream << HTTP_request_body;
 
 	HTTPResponse res;
-	std::istream& res_stream = session.receiveResponse(res);
+	std::istream& res_stream = client->receiveResponse(res);
     return deserializeTokenResponse(res_stream);
 }
 
@@ -58,7 +58,9 @@ HTTPRequest AuthTokenFetcher::buildTokenRequest(const std::string &client_ID, co
 		encodeQueryParameters(params);
 
 	//TODO: check that this HTTP request is valid
-	HTTPRequest req(HTTPRequest::HTTP_POST, token_endpoint, HTTPMessage::HTTP_1_1);
+	std::string path(token_endpoint.getPathAndQuery());
+	if (path.empty()) path = "/";
+	HTTPRequest req(HTTPRequest::HTTP_POST, path, HTTPMessage::HTTP_1_1);
 	req.setContentType("application/x-www-form-urlencoded");
 	req.setContentLength(HTTP_request_body.length());
 	return req;
@@ -98,7 +100,7 @@ std::string AuthTokenFetcher::encodeQueryParameters(const std::unordered_map<std
 
 AuthToken AuthTokenFetcher::deserializeTokenResponse(std::istream& response)
 {
-	oco::JSON::Parser parser;
+	Poco::JSON::Parser parser;
 	auto result = parser.parse(response);
 	auto object = result.extract<Poco::JSON::Object::Ptr>();
 	auto token = object->getValue<std::string>("access_token");

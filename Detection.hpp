@@ -14,7 +14,7 @@ public:
 		HARMFUL
 	};
 
-	Detection(const Category& category, const std::string& name, const std::string& member_name = "");
+	Detection(const Category &category, const std::string &name, const std::string &member_name = "");
 
 	Category getCategory();
 
@@ -23,9 +23,9 @@ public:
 	std::string getMemberName();
 
 private:
-	const Category& category;
-	const std::string& name;
-	const std::string& member_name;
+	Category category;
+	std::string name;
+	std::string member_name;
 
 };
 

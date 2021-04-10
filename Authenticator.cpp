@@ -1,6 +1,7 @@
 #include "Authenticator.hpp"
 
-Authenticator::Authenticator(const std::string &authorization_address,
+Authenticator::Authenticator(
+	const std::string &authorization_address,
 	const std::string &client_ID,
 	const std::string &client_secret,
 	const std::set<std::string> &scopes) :
@@ -10,8 +11,8 @@ Authenticator::Authenticator(const std::string &authorization_address,
 		scopes{ scopes } 
 {};
 
-AuthToken Authenticator::fetchToken(const std::string &URI)
+AuthToken Authenticator::fetchToken()
 {
-	return token_fetcher->fetch(URI, client_ID, client_secret, scopes);
+	return token_fetcher->fetch(client_ID, client_secret, scopes);
 }
 

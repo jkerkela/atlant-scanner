@@ -5,12 +5,13 @@
 
 class AuthToken {
 public:
-	AuthToken(const std::string& auth_token, int expiration);
+	AuthToken() = default;
+	AuthToken(const std::string& auth_token, const int expiration);
 	std::string getToken();
 	int getExpiration();
 
 private:
-	const std::string &auth_token;
-	const int expiration;
+	std::string auth_token;
+	int expiration;
 };
 #endif // AUTHTOKEN_HPP

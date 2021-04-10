@@ -13,15 +13,15 @@ using namespace Poco::Net;
 class FileScanner {
 
 public:
-	FileScanner(const std::string &scanningAddress, const Authenticator &authenticator);
+	FileScanner(const std::string &scanningAddress, Authenticator &authenticator);
 	void refreshToken();
 
 private:
-	const std::string &base_URI;
-	const std::string &scan_endpoint;
-	const std::string &poll_endpoint;
+	std::string base_URI;
+	std::string scan_endpoint;
+	std::string poll_endpoint;
 	HTTPClientSession client;
-	const Authenticator &authenticator;
+	Authenticator &authenticator;
 	AuthToken auth_token;
 };
 #endif // FILESCANNER_HPP

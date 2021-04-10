@@ -10,6 +10,7 @@
 
 #include "AuthToken.hpp"
 #include "ScanResult.hpp"
+#include <Poco/URI.h>
 
 using namespace Poco::Net;
 
@@ -17,14 +18,14 @@ class AuthTokenFetcher {
 
 public:
 	AuthTokenFetcher(const std::string &authorization_address);
-	AuthToken fetch(const std::string &URI,
+	AuthToken fetch(
 		const std::string &client_ID,
 		const std::string &client_secret,
 		const std::set<std::string> &scopes);
 
 private:
-	const std::string &token_endpoint;
-	const HTTPClientSession &client;
+	Poco::URI token_endpoint;
+	std::unique_ptr<HTTPClientSession> client;
 	std::string HTTP_request_body;
 
 	HTTPRequest buildTokenRequest(const std::string &client_ID, const std::string &client_secret, const std::set<std::string> &scopes);
