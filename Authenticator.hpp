@@ -4,7 +4,8 @@
 #include <string>
 #include <set>
 
-#include "TokenFetcher.hpp"
+#include "AuthTokenFetcher.hpp"
+#include "AuthToken.hpp"
 
 class Authenticator {
 
@@ -13,9 +14,10 @@ public:
 		const std::string &client_ID,
 		const std::string &client_secret,
 		const std::set<std::string> &scopes);
+	AuthToken fetchToken(const std::string& URI);
 
 private:
-	std::unique_ptr<TokenFetcher> token_fetcher;
+	std::unique_ptr<AuthTokenFetcher> token_fetcher;
 	std::string client_ID;
 	std::string client_secret;
 	std::set<std::string> scopes;

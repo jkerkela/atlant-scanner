@@ -6,6 +6,7 @@
 #include <Poco/Net/HTTPClientSession.h>
 
 #include "Authenticator.hpp"
+#include "AuthToken.hpp"
 
 using namespace Poco::Net;
 
@@ -13,13 +14,14 @@ class FileScanner {
 
 public:
 	FileScanner(const std::string &scanningAddress, const Authenticator &authenticator);
+	void refreshToken();
 
 private:
-	std::string base_URI; //was URI
-	std::string scan_endpoint; //was URI
-	std::string poll_endpoint; //was URI
+	const std::string &base_URI;
+	const std::string &scan_endpoint;
+	const std::string &poll_endpoint;
 	HTTPClientSession client;
 	const Authenticator &authenticator;
-	// Token token; TODO
+	AuthToken auth_token;
 };
 #endif // FILESCANNER_HPP
