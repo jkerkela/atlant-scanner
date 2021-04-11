@@ -104,8 +104,34 @@ AuthToken AuthTokenFetcher::deserializeTokenResponse(std::istream& response)
 	auto result = parser.parse(response);
 	auto object = result.extract<Poco::JSON::Object::Ptr>();
 	auto token = object->getValue<std::string>("access_token");
-	auto expires_in = object->getValue<std::string>("expires_in");
+	auto expires_in = object->getValue<int>("expires_in");
 	return AuthToken(token, expires_in);
+}
+
+Detection buildDetection(Poco::JSON::Array::ConstIterator it) {
+	auto object = it->extract<Poco::JSON::Object::Ptr>();
+	auto detection_category = object->getValue<std::string>("category");
+	Detection::Category category;
+
+	if (detection_category == "suspicious") {
+		category = Detection::Category::SUSPICIOUS;
+	}
+	else if (detection_category == "PUA") {
+		category = Detection::Category::PUA;
+	}
+	else if (detection_category == "UA") {
+		category = Detection::Category::UA;
+	}
+	else if (detection_category == "harmful") {
+		category = Detection::Category::HARMFUL;
+	}
+	else {
+		throw new APIException("Invalid detection category");
+	}
+
+	auto name = object->getValue<std::string>("name");
+	auto member = object->getValue<std::string>("member_name");
+	return Detection(category, name, member);
 }
 
 ScanResult AuthTokenFetcher::deserializeScanResponse(std::istream& response) 
@@ -160,30 +186,4 @@ ScanResult AuthTokenFetcher::deserializeScanResponse(std::istream& response)
 	}
 
 	return ScanResult(status, result, detections);
-}
-
-Detection buildDetection(Poco::JSON::Array::ConstIterator it) {
-	auto object = it->extract<Poco::JSON::Object::Ptr>();
-	auto detection_category = object->getValue<std::string>("category");
-	Detection::Category category;
-
-	if (detection_category == "suspicious") {
-		category = Detection::Category::SUSPICIOUS;
-	}
-	else if (detection_category == "PUA") {
-		category = Detection::Category::PUA;
-	}
-	else if (detection_category == "UA") {
-		category = Detection::Category::UA;
-	}
-	else if (detection_category == "harmful") {
-		category = Detection::Category::HARMFUL;
-	}
-	else {
-		throw new APIException("Invalid detection category");
-	}
-
-	auto name = object->getValue<std::string>("name");
-	auto member = object->getValue<std::string>("member_name");
-	return Detection(category, name, member);
 }

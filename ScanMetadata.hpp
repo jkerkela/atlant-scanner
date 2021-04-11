@@ -1,16 +1,23 @@
 #ifndef SCANMETADATA_HPP
 #define SCANMETADATA_HPP
 
+#include<optional>
+
 #include "ScanSettings.hpp"
 #include "ContentMetadata.hpp"
+
+#include <Poco/JSON/Object.h>
+
 class ScanMetadata {
 public:
-	ScanMetadata(const ScanSettings& scan_settings = ScanSettings{}, const ContentMetadata& content_metadata = ContentMetadata{});
-	ScanSettings getScanSettings();
-	ContentMetadata getContentMetadata();
+	ScanMetadata(const std::optional<ScanSettings> &scan_settings = std::nullopt,
+		const std::optional<ContentMetadata> &content_metadata = std::nullopt);
+	std::optional<ScanSettings> getScanSettings() { return scan_settings };
+	std::optional<ContentMetadata> getContentMetadata() { return content_metadata };
+	Poco::JSON::Object::Ptr to_json_object();
 
 private:
-	ScanSettings scan_settings;
-	ContentMetadata content_metadata;
+	std::optional<ScanSettings> scan_settings;
+	std::optional<ContentMetadata> content_metadata;
 };
 #endif // SCANMETADATA_HPP

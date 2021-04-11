@@ -19,3 +19,21 @@ std::list<Detection> ScanResult::getDetections()
 {
 	return detections;
 }
+
+std::optional<std::string> ScanResult::getPollURL() 
+{
+	return poll_URL;
+}
+
+void ScanResult::setPollURL(const std::string& poll_url)
+{
+	poll_URL = poll_url;
+}
+
+std::optional<int> ScanResult::getRetryAfter() {
+	return retry_after;
+}
+
+void ScanResult::setRetryAfter(const int time) {
+	retry_after = time;
+}

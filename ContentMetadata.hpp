@@ -2,30 +2,34 @@
 #define CONTENTMETADATA_HPP
 
 #include<string>
+#include<optional>
+
+#include <Poco/JSON/Object.h>
 
 class ContentMetadata {
 
 public:
 	ContentMetadata(
-		const std::string &SHA1 = "",
-		const std::string &URI = "",
-		const int content_length = 0,
-		const std::string &content_type = "",
-		const std::string &charset = ""
+		const std::optional<std::string> &SHA1 = std::nullopt,
+		const std::optional<std::string> &URI = std::nullopt,
+		const std::optional<int> content_length = std::nullopt,
+		const std::optional<std::string> &content_type = std::nullopt,
+		const std::optional<std::string> &charset = std::nullopt
 	);
 
-	std::string getSHA1() { return SHA1 };
-	std::string getURI() { return URI };
-	int getContentLength() { return content_length };
-	std::string getContentType() { return content_type};
-	std::string getCharset() { return charset };
+	std::optional<std::string> getSHA1() { return SHA1 };
+	std::optional<std::string> getURI() { return URI };
+	std::optional<int> getContentLength() { return content_length };
+	std::optional<std::string> getContentType() { return content_type};
+	std::optional<std::string> getCharset() { return charset };
+	Poco::JSON::Object::Ptr to_json_object();
 
 
 private:
-	std::string SHA1;
-	std::string URI;
-	int content_length;
-	std::string content_type;
-	std::string charset;
+	std::optional<std::string> SHA1;
+	std::optional<std::string> URI;
+	std::optional<int> content_length;
+	std::optional<std::string> content_type;
+	std::optional<std::string> charset;
 };
 #endif // CONTENTMETADATA_HPP
