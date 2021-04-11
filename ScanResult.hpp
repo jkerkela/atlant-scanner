@@ -24,6 +24,7 @@ public:
 		HARMFUL
 	};
 
+	ScanResult() = default;
 	ScanResult(const ScanResult::Status& status, const ScanResult::Result& result, const std::list<Detection>& detections);
 	Status getStatus();
 	Result getResult();
@@ -34,9 +35,9 @@ public:
 	void setRetryAfter(const int time);
 
 private:
-	const Status& status;
-	const Result& result;
-	const std::list<Detection>& detections;
+	Status status;
+	Result result;
+	std::list<Detection> detections;
 	std::optional<int> retry_after;
 	std::optional<std::string> poll_URL;
 };

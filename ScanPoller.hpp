@@ -13,12 +13,12 @@ class ScanPoller {
 
 public:
 	ScanPoller(FileScanner &file_scanner);
-	std::optional<ScanResult> scan(ScanMetadata &metadata, std::string &path);
+	ScanResult scan(ScanMetadata &metadata, std::string &path);
 
 private:
 	FileScanner &file_scanner;
 
-	std::optional<ScanResult> scan(ScanMetadata &metadata, std::ifstream file_stream);
+	ScanResult scan(ScanMetadata &metadata, std::ifstream file_stream);
 };
 
 #endif // SCANPOLLER_HPP

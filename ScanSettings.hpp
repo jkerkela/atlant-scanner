@@ -15,10 +15,10 @@ public:
 		//TODO: Optional<SecurityCloudSettings> securityCloudSettings
 	);
 
-	std::optional<bool> getScanArchives() { return do_scan_archives };
-	std::optional<int> getMaxNested() { return max_nested };
-	std::optional<bool> getStopOnFirst() { return do_stop_on_first };
-	std::optional<bool> getAllowUpstreamMetadata() { return allow_upstream_metadata };
+	std::optional<bool> getScanArchives() { return do_scan_archives; };
+	std::optional<int> getMaxNested() { return max_nested; };
+	std::optional<bool> getStopOnFirst() { return do_stop_on_first; };
+	std::optional<bool> getAllowUpstreamMetadata() { return allow_upstream_metadata; };
 	Poco::JSON::Object::Ptr to_json_object();
 
 

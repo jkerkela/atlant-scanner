@@ -45,13 +45,13 @@ AuthToken AuthTokenFetcher::fetch(
 HTTPRequest AuthTokenFetcher::buildTokenRequest(const std::string &client_ID, const std::string &client_secret, const std::set<std::string> &scopes) 
 {
 	std::unordered_map<std::string, std::string> params;
-	params.insert(JSON_GRANT_TYPE_KEY, JSON_GRANT_TYPE_VALUE);
-	params.insert(std::string(JSON_CLIENT_ID_KEY), client_ID);
-	params.insert(std::string(JSON_CLIENT_SECRET_KEY), client_secret);
-	params.insert(JSON_AUDIENCE_KEY, AUDIENCE);
+	params.insert({ std::string(JSON_GRANT_TYPE_KEY), std::string(JSON_GRANT_TYPE_VALUE) });
+	params.insert({ std::string(JSON_CLIENT_ID_KEY), client_ID });
+	params.insert({ std::string(JSON_CLIENT_SECRET_KEY), client_secret });
+	params.insert({ std::string(JSON_AUDIENCE_KEY), std::string(AUDIENCE) });
 
 	if (!scopes.empty()) {
-		params.insert(std::string(JSON_SCOPE_KEY), encodeScopes(scopes));
+		params.insert({ std::string(JSON_SCOPE_KEY), encodeScopes(scopes) });
 	}
 
 	HTTP_request_body =
@@ -108,7 +108,7 @@ AuthToken AuthTokenFetcher::deserializeTokenResponse(std::istream& response)
 	return AuthToken(token, expires_in);
 }
 
-Detection buildDetection(Poco::JSON::Array::ConstIterator it) {
+Detection AuthTokenFetcher::buildDetection(Poco::JSON::Array::ConstIterator it) {
 	auto object = it->extract<Poco::JSON::Object::Ptr>();
 	auto detection_category = object->getValue<std::string>("category");
 	Detection::Category category;
@@ -152,25 +152,25 @@ ScanResult AuthTokenFetcher::deserializeScanResponse(std::istream& response)
 		throw new APIException("Invalid scan status");
 	}
 
-	auto scan_result = object->getValue<std::string>("scan_result");
-	ScanResult::Result result;
-	if (scan_result == "clean") {
-		result = ScanResult::Result::CLEAN;
+	auto scan_res = object->getValue<std::string>("scan_result");
+	ScanResult::Result scan_result;
+	if (scan_res == "clean") {
+		scan_result = ScanResult::Result::CLEAN;
 	}
-	else if (scan_result == "whitelisted") {
-		result = ScanResult::Result::WHITELISTED;
+	else if (scan_res == "whitelisted") {
+		scan_result = ScanResult::Result::WHITELISTED;
 	}
-	else if (scan_result == "suspicious") {
-		result = ScanResult::Result::SUSPICIOUS;
+	else if (scan_res == "suspicious") {
+		scan_result = ScanResult::Result::SUSPICIOUS;
 	}
-	else if (scan_result == "PUA") {
-		result = ScanResult::Result::PUA;
+	else if (scan_res == "PUA") {
+		scan_result = ScanResult::Result::PUA;
 	}
-	else if (scan_result == "UA") {
-		result = ScanResult::Result::UA;
+	else if (scan_res == "UA") {
+		scan_result = ScanResult::Result::UA;
 	}
-	else if (scan_result == "harmful") {
-		result = ScanResult::Result::HARMFUL;
+	else if (scan_res == "harmful") {
+		scan_result = ScanResult::Result::HARMFUL;
 	}
 	else {
 		throw new APIException("Invalid detection category");
@@ -185,5 +185,5 @@ ScanResult AuthTokenFetcher::deserializeScanResponse(std::istream& response)
 
 	}
 
-	return ScanResult(status, result, detections);
+	return ScanResult(status, scan_result, detections);
 }

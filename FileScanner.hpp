@@ -8,6 +8,7 @@
 #include <Poco/Net/HTTPClientSession.h>
 #include <Poco/Net/HTTPRequest.h>
 #include <Poco/URI.h>
+#include <Poco/JSON/Parser.h>
 
 #include "Authenticator.hpp"
 #include "AuthToken.hpp"
@@ -19,9 +20,9 @@ using namespace Poco::Net;
 class FileScanner {
 
 public:
-	FileScanner(const Poco::URI &scanningAddress, Authenticator &authenticator);
+	FileScanner(Poco::URI &scanningAddress, Authenticator &authenticator);
 	void refreshToken();
-	std::optional<ScanResult> scan(ScanMetadata &metadata, std::ifstream &input);
+	ScanResult scan(ScanMetadata &metadata, std::ifstream &input);
 
 private:
 	Poco::URI base_URI;
@@ -34,7 +35,8 @@ private:
 
 	HTTPRequest buildScanRequest(ScanMetadata &metadata, std::ifstream &input);
 	std::string serializeScanMetadata(ScanMetadata &metadata);
-	std::optional<ScanResult> processScanResponse(HTTPClientSession& client);
-	std::optional<ScanResult> deserializeScanResponse(std::istream &response);
+	ScanResult processScanResponse(HTTPClientSession& client);
+	ScanResult deserializeScanResponse(std::istream &response);
+	Detection buildDetection(Poco::JSON::Array::ConstIterator it);
 };
 #endif // FILESCANNER_HPP

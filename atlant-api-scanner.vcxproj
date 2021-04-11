@@ -89,6 +89,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Users\jonik\source\repos\POCO\poco\JSON\include;C:\Users\jonik\source\repos\POCO\poco\Foundation\include;C:\Users\jonik\source\repos\POCO\poco\Net\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,19 +134,29 @@
     <ClCompile Include="AtlantScanner.cpp" />
     <ClCompile Include="Authenticator.cpp" />
     <ClCompile Include="AuthToken.cpp" />
+    <ClCompile Include="ContentMetadata.cpp" />
     <ClCompile Include="Detection.cpp" />
     <ClCompile Include="FileScanner.cpp" />
     <ClCompile Include="AuthTokenFetcher.cpp" />
+    <ClCompile Include="MultipartRequestBuilder.cpp" />
+    <ClCompile Include="ScanMetadata.cpp" />
+    <ClCompile Include="ScanPoller.cpp" />
     <ClCompile Include="ScanResult.cpp" />
+    <ClCompile Include="ScanSettings.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="APIException.hpp" />
     <ClInclude Include="Authenticator.hpp" />
     <ClInclude Include="AuthToken.hpp" />
+    <ClInclude Include="ContentMetadata.hpp" />
     <ClInclude Include="Detection.hpp" />
     <ClInclude Include="FileScanner.hpp" />
     <ClInclude Include="AuthTokenFetcher.hpp" />
+    <ClInclude Include="MultipartRequestBuilder.hpp" />
+    <ClInclude Include="ScanMetadata.hpp" />
+    <ClInclude Include="ScanPoller.hpp" />
     <ClInclude Include="ScanResult.hpp" />
+    <ClInclude Include="ScanSettings.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

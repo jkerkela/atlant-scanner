@@ -7,10 +7,11 @@
 
 #include <Poco/Net/HTTPClientSession.h>
 #include <Poco/Net/HTTPRequest.h>
+#include <Poco/URI.h>
+#include <Poco/JSON/Parser.h>
 
 #include "AuthToken.hpp"
 #include "ScanResult.hpp"
-#include <Poco/URI.h>
 
 using namespace Poco::Net;
 
@@ -33,9 +34,7 @@ private:
 	std::string encodeQueryParameters(const std::unordered_map<std::string, std::string> &params);
 	AuthToken deserializeTokenResponse(std::istream& response);
 	ScanResult deserializeScanResponse(std::istream& response);
-
-
-
+	Detection buildDetection(Poco::JSON::Array::ConstIterator it);
 };
 
 #endif // AUTHTOKENFETCHER_HPP

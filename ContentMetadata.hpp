@@ -17,11 +17,11 @@ public:
 		const std::optional<std::string> &charset = std::nullopt
 	);
 
-	std::optional<std::string> getSHA1() { return SHA1 };
-	std::optional<std::string> getURI() { return URI };
-	std::optional<int> getContentLength() { return content_length };
-	std::optional<std::string> getContentType() { return content_type};
-	std::optional<std::string> getCharset() { return charset };
+	std::optional<std::string> getSHA1() { return SHA1; };
+	std::optional<std::string> getURI() { return URI; };
+	std::optional<int> getContentLength() { return content_length; };
+	std::optional<std::string> getContentType() { return content_type;  };
+	std::optional<std::string> getCharset() { return charset; };
 	Poco::JSON::Object::Ptr to_json_object();
 
 

@@ -8,7 +8,6 @@
 #include <exception>
 
 #include <Poco/Net/HTTPResponse.h>
-#include <Poco/JSON/Parser.h>
 
 using Poco::Net::HTTPResponse;
 
@@ -16,10 +15,10 @@ namespace {
 	constexpr auto API_PREFIX = "/api/poll/v1";
 }
 
-FileScanner::FileScanner(const Poco::URI &scanning_address, Authenticator &authenticator)
+FileScanner::FileScanner(Poco::URI &scanning_address, Authenticator &authenticator)
 	: base_URI{ scanning_address },
-	scan_endpoint{ Poco::URI(scanning_address + API_PREFIX) },
-	poll_endpoint{ Poco::URI(scanning_address + API_PREFIX) },
+	scan_endpoint{ Poco::URI(scanning_address.getHost() + API_PREFIX) },
+	poll_endpoint{ Poco::URI(scanning_address.getHost() + API_PREFIX) },
 	authenticator{ authenticator }
 {
 	refreshToken();
@@ -30,7 +29,7 @@ void FileScanner::refreshToken()
 	auth_token = authenticator.fetchToken();
 }
 
-std::optional<ScanResult> FileScanner::scan(ScanMetadata &metadata, std::ifstream& input)
+ScanResult FileScanner::scan(ScanMetadata &metadata, std::ifstream& input)
 {
 	HTTPRequest scan_request = buildScanRequest(metadata, input);
 
@@ -60,15 +59,15 @@ HTTPRequest FileScanner::buildScanRequest(ScanMetadata &metadata, std::ifstream&
 	return req;
 }
 
-std::optional<ScanResult> FileScanner::processScanResponse(HTTPClientSession &client)
+ScanResult FileScanner::processScanResponse(HTTPClientSession &client)
 {
-	std::optional<ScanResult> scan_result = std::nullopt;
+	ScanResult scan_result{};
 	HTTPResponse res;
 	std::istream& res_stream = client.receiveResponse(res);
 	auto status_code = res.getStatus();
 	if ((status_code == HTTPResponse::HTTPStatus::HTTP_OK) || (status_code == HTTPResponse::HTTPStatus::HTTP_PROCESSING)) {
 		try {
-			scan_result.value = deserializeScanResponse(res_stream);
+			scan_result = deserializeScanResponse(res_stream);
 		}
 		catch (const std::exception &e) {
 			throw new APIException("Invalid scan response:" + std::string(e.what()));
@@ -84,7 +83,7 @@ std::optional<ScanResult> FileScanner::processScanResponse(HTTPClientSession &cl
 		}
 		auto location = res.get("Location");
 
-		scan_result.value.setPollURL(location);
+		scan_result.setPollURL(location);
 
 		if (!res.has("Retry-After")) {
 			throw new APIException("Missing retry after duration");
@@ -92,7 +91,7 @@ std::optional<ScanResult> FileScanner::processScanResponse(HTTPClientSession &cl
 
 		auto retry = res.get("Retry-After");
 		try {
-			scan_result.value.setRetryAfter(std::stoi(retry));
+			scan_result.setRetryAfter(std::stoi(retry));
 		}
 		catch (const std::invalid_argument &e) {
 			throw new APIException("Invalid retry after duration: " + std::string(e.what()));
@@ -102,7 +101,8 @@ std::optional<ScanResult> FileScanner::processScanResponse(HTTPClientSession &cl
 	return scan_result;
 }
 
-Detection buildDetection(Poco::JSON::Array::ConstIterator it) {
+Detection FileScanner::buildDetection(Poco::JSON::Array::ConstIterator it) 
+{
 	auto object = it->extract<Poco::JSON::Object::Ptr>();
 	auto detection_category = object->getValue<std::string>("category");
 	Detection::Category category;
@@ -128,7 +128,7 @@ Detection buildDetection(Poco::JSON::Array::ConstIterator it) {
 	return Detection(category, name, member);
 }
 
-std::optional<ScanResult> FileScanner::deserializeScanResponse(std::istream& response)
+ScanResult FileScanner::deserializeScanResponse(std::istream& response)
 {
 	Poco::JSON::Parser parser;
 	auto result = parser.parse(response);
@@ -146,25 +146,25 @@ std::optional<ScanResult> FileScanner::deserializeScanResponse(std::istream& res
 		throw new APIException("Invalid scan status");
 	}
 
-	auto scan_result = object->getValue<std::string>("scan_result");
-	ScanResult::Result result;
-	if (scan_result == "clean") {
-		result = ScanResult::Result::CLEAN;
+	auto scan_res = object->getValue<std::string>("scan_result");
+	ScanResult::Result scan_result;
+	if (scan_res == "clean") {
+		scan_result = ScanResult::Result::CLEAN;
 	}
-	else if (scan_result == "whitelisted") {
-		result = ScanResult::Result::WHITELISTED;
+	else if (scan_res == "whitelisted") {
+		scan_result = ScanResult::Result::WHITELISTED;
 	}
-	else if (scan_result == "suspicious") {
-		result = ScanResult::Result::SUSPICIOUS;
+	else if (scan_res == "suspicious") {
+		scan_result = ScanResult::Result::SUSPICIOUS;
 	}
-	else if (scan_result == "PUA") {
-		result = ScanResult::Result::PUA;
+	else if (scan_res == "PUA") {
+		scan_result = ScanResult::Result::PUA;
 	}
-	else if (scan_result == "UA") {
-		result = ScanResult::Result::UA;
+	else if (scan_res == "UA") {
+		scan_result = ScanResult::Result::UA;
 	}
-	else if (scan_result == "harmful") {
-		result = ScanResult::Result::HARMFUL;
+	else if (scan_res == "harmful") {
+		scan_result = ScanResult::Result::HARMFUL;
 	}
 	else {
 		throw new APIException("Invalid detection category");
@@ -178,7 +178,7 @@ std::optional<ScanResult> FileScanner::deserializeScanResponse(std::istream& res
 		detections.emplace_back(detection);
 	}
 
-	return ScanResult(status, result, detections);
+	return ScanResult(status, scan_result, detections);
 }
 
 

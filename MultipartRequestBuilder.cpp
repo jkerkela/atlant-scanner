@@ -41,29 +41,28 @@ std::string MultiPartRequestBuilder::encode()
 	auto terminator = encodeToUTF8(std::string("\r\n--" + boundary + "--\r\n"));
 
 	result += initiator;
-	for (int i = 0; i < parts.size; i ++) {
+	for (int i = 0; i < parts.size(); i++) {
 		result += parts.at(i).encode();
-		if (i != (parts.size - 1)) {
-			result += separator
+		if (i != (parts.size() - 1)) {
+			result += separator;
 		}
 	}
 	return result + terminator;
 }
 
+using random_bytes_engine = std::independent_bits_engine<std::default_random_engine, CHAR_BIT, unsigned int>;
 
 std::string MultiPartRequestBuilder::makeBoundary()
 {
-	using random_bytes_engine = std::independent_bits_engine<
-		std::default_random_engine, CHAR_BIT, unsigned char>;
 	random_bytes_engine rbe;
-	std::vector<unsigned char> data(BOUNDARY_BYTES);
+	std::vector<int> data(BOUNDARY_BYTES);
 	std::generate(begin(data), end(data), std::ref(rbe));
 
 	std::string result = "Boundary";
-	
+
 	//TODO: do we get correct boundary here?
-	for (const item : data) {
-		result += item;
+	for (auto const item : data) {
+		result += std::to_string(item);
 	}
 	return result;
 }

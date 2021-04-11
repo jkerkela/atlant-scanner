@@ -27,7 +27,8 @@ int main(int argc, char* argv[])
 	ScanMetadata metadata{};
 
 	try {
-		FileScanner fileScanner{Poco::URI("commandLine.getScanAddress"), authenticator};
+		auto uri = Poco::URI("commandLine.getScanAddress");
+		FileScanner fileScanner{uri, authenticator};
 		ScanPoller scanPoller{fileScanner};
 		std::string file{"commandLine.getInputFile"};
 		std::optional<ScanResult> result = scanPoller.scan(metadata, file);
