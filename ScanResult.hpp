@@ -25,7 +25,11 @@ public:
 	};
 
 	ScanResult() = default;
-	ScanResult(const ScanResult::Status& status, const ScanResult::Result& result, const std::list<Detection>& detections);
+	ScanResult(const ScanResult::Status &status,
+		const ScanResult::Result &result,
+		const std::list<Detection> &detections,
+		const std::optional<int> retry_after = std::nullopt,
+		const std::optional<std::string> poll_URL = std::nullopt);
 	Status getStatus();
 	Result getResult();
 	std::list<Detection> getDetections();

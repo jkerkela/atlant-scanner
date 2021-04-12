@@ -183,7 +183,7 @@ ScanResult FileScanner::deserializeScanResponse(std::istream& response)
 
 
 std::string FileScanner::serializeScanMetadata(ScanMetadata &metadata) {
-	auto json_obj = metadata.to_json_object();
+	auto json_obj = metadata.toJsonObject();
 	std::ostringstream oss;
 	Poco::JSON::Stringifier::stringify(json_obj, oss);
 	return oss.str();

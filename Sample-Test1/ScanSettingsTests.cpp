@@ -7,10 +7,10 @@
 
 TEST(ScanSettings, TestConstructorWithDefaultParams) {
 	ScanSettings scan_settings{};
-	EXPECT_EQ(scan_settings.getAllowUpstreamMetadata(), std::nullopt);
-	EXPECT_EQ(scan_settings.getMaxNested(), std::nullopt);
-	EXPECT_EQ(scan_settings.getScanArchives(), std::nullopt);
-	EXPECT_EQ(scan_settings.getStopOnFirst(), std::nullopt);
+}
+
+TEST(ScanSettings, TestConstructorWithFullParams) {
+	ScanSettings scan_settings{ true, 1, true, true };
 }
 
 TEST(ScanSettings, TestgetScanArchives) {

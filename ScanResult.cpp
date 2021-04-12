@@ -1,8 +1,13 @@
 
 #include "ScanResult.hpp"
 
-ScanResult::ScanResult(const ScanResult::Status &status, const ScanResult::Result &result, const std::list<Detection> &detections)
-	: status { status }, result { result }, detections { detections }
+ScanResult::ScanResult(
+	const ScanResult::Status &status,
+	const ScanResult::Result &result,
+	const std::list<Detection> &detections,
+	const std::optional<int> retry_after,
+	const std::optional<std::string> poll_URL)
+	: status{ status }, result{ result }, detections{ detections }, retry_after{ retry_after }, poll_URL{ poll_URL }
 {};
 
 ScanResult::Status ScanResult::getStatus()

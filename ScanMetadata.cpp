@@ -4,7 +4,7 @@ ScanMetadata::ScanMetadata(const std::optional<ScanSettings>& scan_settings, con
 	: scan_settings{ scan_settings }, content_metadata{ content_metadata }
 {}
 
-Poco::JSON::Object::Ptr ScanMetadata::to_json_object()
+Poco::JSON::Object::Ptr ScanMetadata::toJsonObject()
 {
 	Poco::JSON::Object::Ptr json_object = new Poco::JSON::Object();
 	if (scan_settings != std::nullopt) {
