@@ -8,7 +8,7 @@ Poco::JSON::Object::Ptr ScanMetadata::to_json_object()
 {
 	Poco::JSON::Object::Ptr json_object = new Poco::JSON::Object();
 	if (scan_settings != std::nullopt) {
-		json_object->set("scan_settings", scan_settings.value().to_json_object());
+		json_object->set("scan_settings", scan_settings.value().toJsonObject());
 	}
 
 	if (content_metadata != std::nullopt) {

@@ -11,7 +11,7 @@ ScanSettings::ScanSettings(
 	allow_upstream_metadata{ allow_upstream_metadata }
 {}
 
-Poco::JSON::Object::Ptr ScanSettings::to_json_object()
+Poco::JSON::Object::Ptr ScanSettings::toJsonObject()
 {
 	Poco::JSON::Object::Ptr json_object = new Poco::JSON::Object();
 

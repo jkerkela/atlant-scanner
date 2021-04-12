@@ -6,7 +6,7 @@
 class AuthToken {
 public:
 	AuthToken() = default;
-	AuthToken(const std::string &auth_token, const int expiration);
+	AuthToken(const std::string &auth_token, const int &expiration);
 	std::string getToken();
 	int getExpiration();
 

@@ -1,6 +1,6 @@
 #include "AuthToken.hpp"
 
-AuthToken::AuthToken(const std::string& auth_token, const int expiration)
+AuthToken::AuthToken(const std::string &auth_token, const int &expiration)
 	: auth_token{ auth_token }, expiration { expiration }
 {};
 
