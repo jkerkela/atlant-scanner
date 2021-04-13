@@ -19,6 +19,7 @@ private:
 	FileScanner &file_scanner;
 
 	ScanResult scan(ScanMetadata &metadata, std::ifstream file_stream);
+	ScanResult getResultByPoll(const std::optional<int>& retry_after, const std::optional<std::string>& poll_URL);
 };
 
 #endif // SCANPOLLER_HPP

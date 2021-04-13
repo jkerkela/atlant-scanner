@@ -40,6 +40,15 @@ ScanResult FileScanner::scan(ScanMetadata &metadata, std::ifstream& input)
 	return processScanResponse(client);
 }
 
+ScanResult FileScanner::poll(const std::string &poll_URL)
+{
+	auto poll_url = Poco::URI(poll_URL);
+	auto poll_req = buildPollRequest(poll_url);
+	HTTPClientSession client{ poll_url.getHost() };
+	client.sendRequest(poll_req);
+	return processPollResponse(client);
+}
+
 HTTPRequest FileScanner::buildScanRequest(ScanMetadata &metadata, std::ifstream& input)
 {
 	auto metadata_body = serializeScanMetadata(metadata);
@@ -56,6 +65,13 @@ HTTPRequest FileScanner::buildScanRequest(ScanMetadata &metadata, std::ifstream&
 	req.setContentType("multipart/form-data; boundary=" + multipart_request_builder.getBoundary());
 	req.set("Authorization", std::string("Bearer " + auth_token.getToken()));
 	req.setContentLength(HTTP_reques_body.length());
+	return req;
+}
+
+HTTPRequest FileScanner::buildPollRequest(const Poco::URI &poll_URL)
+{
+	HTTPRequest req(HTTPRequest::HTTP_GET, poll_URL.getPathAndQuery(), HTTPMessage::HTTP_1_1);
+	req.set("Authorization", std::string("Bearer " + auth_token.getToken()));
 	return req;
 }
 
@@ -98,6 +114,40 @@ ScanResult FileScanner::processScanResponse(HTTPClientSession &client)
 		}
 	}
 
+	return scan_result;
+}
+
+ScanResult FileScanner::processPollResponse(HTTPClientSession &client) {
+	ScanResult scan_result{};
+	HTTPResponse res;
+	std::istream& res_stream = client.receiveResponse(res);
+	auto status_code = res.getStatus();
+
+	if (status_code == HTTPResponse::HTTPStatus::HTTP_OK) {
+		try {
+			scan_result = deserializeScanResponse(res_stream);
+		}
+		catch (const std::exception& e) {
+			throw new APIException("Invalid scan response:" + std::string(e.what()));
+		}
+	}
+	else {
+		throw new APIException("Unexpected response from scanning service");
+	}
+
+	if (scan_result.getStatus() == ScanResult::Status::PENDING) {
+
+		if (!res.has("Retry-After")) {
+			throw new APIException("Missing retry after duration");
+		}
+		auto retry = res.get("Retry-After");
+		try {
+			scan_result.setRetryAfter(std::stoi(retry));
+		}
+		catch (const std::invalid_argument& e) {
+			throw new APIException("Invalid retry after duration: " + std::string(e.what()));
+		}
+	}
 	return scan_result;
 }
 
@@ -180,7 +230,6 @@ ScanResult FileScanner::deserializeScanResponse(std::istream& response)
 
 	return ScanResult(status, scan_result, detections);
 }
-
 
 std::string FileScanner::serializeScanMetadata(ScanMetadata &metadata) {
 	auto json_obj = metadata.toJsonObject();

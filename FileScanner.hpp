@@ -23,6 +23,7 @@ public:
 	FileScanner(Poco::URI &scanningAddress, Authenticator &authenticator);
 	void refreshToken();
 	ScanResult scan(ScanMetadata &metadata, std::ifstream &input);
+	ScanResult poll(const std::string& poll_URL);
 
 private:
 	Poco::URI base_URI;
@@ -34,8 +35,10 @@ private:
 	std::string HTTP_reques_body;
 
 	HTTPRequest buildScanRequest(ScanMetadata &metadata, std::ifstream &input);
+	HTTPRequest buildPollRequest(const Poco::URI& poll_URL);
 	std::string serializeScanMetadata(ScanMetadata &metadata);
-	ScanResult processScanResponse(HTTPClientSession& client);
+	ScanResult processScanResponse(HTTPClientSession &client);
+	ScanResult processPollResponse(HTTPClientSession& client);
 	ScanResult deserializeScanResponse(std::istream &response);
 	Detection buildDetection(Poco::JSON::Array::ConstIterator it);
 };
