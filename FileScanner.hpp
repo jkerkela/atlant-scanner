@@ -20,7 +20,7 @@ using namespace Poco::Net;
 class FileScanner {
 
 public:
-	FileScanner(Poco::URI &scanningAddress, Authenticator &authenticator);
+	FileScanner(const std::string &scanning_address, Authenticator &authenticator);
 	void refreshToken();
 	ScanResult scan(ScanMetadata &metadata, std::ifstream &input);
 	ScanResult poll(const std::string& poll_URL);

@@ -138,6 +138,7 @@
     <ClCompile Include="Detection.cpp" />
     <ClCompile Include="FileScanner.cpp" />
     <ClCompile Include="AuthTokenFetcher.cpp" />
+    <ClCompile Include="HTTPCommunicationImpl.cpp" />
     <ClCompile Include="MultipartRequestBuilder.cpp" />
     <ClCompile Include="ScanMetadata.cpp" />
     <ClCompile Include="ScanPoller.cpp" />
@@ -152,6 +153,8 @@
     <ClInclude Include="Detection.hpp" />
     <ClInclude Include="FileScanner.hpp" />
     <ClInclude Include="AuthTokenFetcher.hpp" />
+    <ClInclude Include="HTTPCommunication.hpp" />
+    <ClInclude Include="HTTPCommunicationImpl.hpp" />
     <ClInclude Include="MultipartRequestBuilder.hpp" />
     <ClInclude Include="ScanMetadata.hpp" />
     <ClInclude Include="ScanPoller.hpp" />

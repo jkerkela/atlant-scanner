@@ -6,7 +6,7 @@ TEST(AuthTokenFetcher, TestConstructor) {
 }
 
 
-//TODO: finalize, add required assert(s), mocks and enable test
+//TODO: finalize: implement mocks using HTTPCommunication.hpp, use it, add required assert(s) and enable test
 //TEST(AuthTokenFetcher, Testfetch) {
 //	AuthTokenFetcher auth_token_fetcher{ "http://example.com" };
 //	std::set<std::string> scopes{ "scope1" };

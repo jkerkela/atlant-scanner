@@ -7,7 +7,6 @@
 #include <stdexcept>
 #include <unordered_map>
 
-#include <Poco/Net/HTTPResponse.h>
 #include <Poco/UTF8Encoding.h>
 #include <Poco/JSON/Parser.h>
 #include <Poco/JSON/JSONException.h>
@@ -26,7 +25,7 @@ namespace {
 
 AuthTokenFetcher::AuthTokenFetcher(const std::string &authorization_address)
 	: token_endpoint{ Poco::URI(authorization_address + std::string(API_PREFIX)) },
-	client{ std::make_unique<HTTPClientSession>(token_endpoint.getHost()) }
+	client{ std::make_unique<HTTPClientSessionImpl>(token_endpoint.getHost()) }
 {}
 
 AuthToken AuthTokenFetcher::fetch(
@@ -34,12 +33,13 @@ AuthToken AuthTokenFetcher::fetch(
 	const std::string &client_secret,
 	const std::set<std::string> &scopes)
 {
-	//TODO: start debugging from here
-	HTTPRequest tokenRequest = buildTokenRequest(client_ID, client_secret, scopes);
+	HTTPRequestImpl tokenRequest = buildTokenRequest(client_ID, client_secret, scopes);
+	//TODO: mock HTTPRequest sendRequest to not throw, in mock class
 	std::ostream& req_stream = client->sendRequest(tokenRequest);
 	req_stream << HTTP_request_body;
 
-	HTTPResponse res;
+	HTTPResponseImpl res;
+	//TODO: mock receiveResponse to return correct fake response, in mock class 
 	std::istream& res_stream = client->receiveResponse(res);
 	try {
 		return deserializeTokenResponse(res_stream);
@@ -49,7 +49,7 @@ AuthToken AuthTokenFetcher::fetch(
 	}
 }
 
-HTTPRequest AuthTokenFetcher::buildTokenRequest(const std::string &client_ID, const std::string &client_secret, const std::set<std::string> &scopes) 
+HTTPRequestImpl AuthTokenFetcher::buildTokenRequest(const std::string &client_ID, const std::string &client_secret, const std::set<std::string> &scopes)
 {
 	std::unordered_map<std::string, std::string> params;
 	params.insert({ std::string(JSON_GRANT_TYPE_KEY), std::string(JSON_GRANT_TYPE_VALUE) });
@@ -66,7 +66,7 @@ HTTPRequest AuthTokenFetcher::buildTokenRequest(const std::string &client_ID, co
 
 	std::string path(token_endpoint.getPathAndQuery());
 	if (path.empty()) path = "/";
-	HTTPRequest req(HTTPRequest::HTTP_POST, path, HTTPMessage::HTTP_1_1);
+	HTTPRequestImpl req(HTTPRequest::HTTP_POST, path);
 	req.setContentType("application/x-www-form-urlencoded");
 	req.setContentLength(HTTP_request_body.length());
 	return req;

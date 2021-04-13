@@ -5,8 +5,7 @@
 #include <set>
 #include <unordered_map>
 
-#include <Poco/Net/HTTPClientSession.h>
-#include <Poco/Net/HTTPRequest.h>
+#include "HTTPCommunicationImpl.hpp"
 #include <Poco/URI.h>
 #include <Poco/JSON/Parser.h>
 
@@ -26,10 +25,10 @@ public:
 
 private:
 	Poco::URI token_endpoint;
-	std::unique_ptr<HTTPClientSession> client;
+	std::unique_ptr<HTTPClientSessionImpl> client;
 	std::string HTTP_request_body;
 
-	HTTPRequest buildTokenRequest(const std::string &client_ID, const std::string &client_secret, const std::set<std::string> &scopes);
+	HTTPRequestImpl buildTokenRequest(const std::string &client_ID, const std::string &client_secret, const std::set<std::string> &scopes);
 	std::string encodeScopes(const std::set<std::string>& scopes);
 	std::string encodeQueryParameters(const std::unordered_map<std::string, std::string> &params);
 	AuthToken deserializeTokenResponse(std::istream& response);

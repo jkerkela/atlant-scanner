@@ -12,13 +12,13 @@
 using Poco::Net::HTTPResponse;
 
 namespace {
-	constexpr auto API_PREFIX = "/api/poll/v1";
+	constexpr auto API_POSTFIX = "/api/poll/v1";
 }
 
-FileScanner::FileScanner(Poco::URI &scanning_address, Authenticator &authenticator)
+FileScanner::FileScanner(const std::string& scanning_address, Authenticator &authenticator)
 	: base_URI{ scanning_address },
-	scan_endpoint{ Poco::URI(scanning_address.getHost() + API_PREFIX) },
-	poll_endpoint{ Poco::URI(scanning_address.getHost() + API_PREFIX) },
+	scan_endpoint{ Poco::URI(scanning_address + API_POSTFIX) },
+	poll_endpoint{ Poco::URI(scanning_address + API_POSTFIX) },
 	authenticator{ authenticator }
 {
 	refreshToken();
