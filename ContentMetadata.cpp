@@ -2,14 +2,14 @@
 
 ContentMetadata::ContentMetadata(
 	const std::optional<std::string>& SHA1,
-	const std::optional<std::string>& UR,
+	const std::optional<std::string>& URI,
 	const std::optional<int> content_length,
 	const std::optional<std::string>& content_type,
 	const std::optional<std::string>& charset
 ) : SHA1{ SHA1 }, URI{ URI }, content_length{ content_length }, content_type{ content_type }, charset{ charset }
 {}
 
-Poco::JSON::Object::Ptr ContentMetadata::to_json_object()
+Poco::JSON::Object::Ptr ContentMetadata::toJsonObject()
 {
 	Poco::JSON::Object::Ptr json_object = new Poco::JSON::Object();
 

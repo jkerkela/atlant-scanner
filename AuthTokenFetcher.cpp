@@ -10,6 +10,7 @@
 #include <Poco/Net/HTTPResponse.h>
 #include <Poco/UTF8Encoding.h>
 #include <Poco/JSON/Parser.h>
+#include <Poco/JSON/JSONException.h>
 
 
 namespace {
@@ -33,13 +34,19 @@ AuthToken AuthTokenFetcher::fetch(
 	const std::string &client_secret,
 	const std::set<std::string> &scopes)
 {
+	//TODO: start debugging from here
 	HTTPRequest tokenRequest = buildTokenRequest(client_ID, client_secret, scopes);
 	std::ostream& req_stream = client->sendRequest(tokenRequest);
 	req_stream << HTTP_request_body;
 
 	HTTPResponse res;
 	std::istream& res_stream = client->receiveResponse(res);
-    return deserializeTokenResponse(res_stream);
+	try {
+		return deserializeTokenResponse(res_stream);
+	}
+	catch (Poco::JSON::JSONException e) {
+		throw new APIException("Invalid token fetch response: " + std::string(e.what()));
+	}
 }
 
 HTTPRequest AuthTokenFetcher::buildTokenRequest(const std::string &client_ID, const std::string &client_secret, const std::set<std::string> &scopes) 
@@ -57,7 +64,6 @@ HTTPRequest AuthTokenFetcher::buildTokenRequest(const std::string &client_ID, co
 	HTTP_request_body =
 		encodeQueryParameters(params);
 
-	//TODO: check that this HTTP request is valid
 	std::string path(token_endpoint.getPathAndQuery());
 	if (path.empty()) path = "/";
 	HTTPRequest req(HTTPRequest::HTTP_POST, path, HTTPMessage::HTTP_1_1);

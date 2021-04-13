@@ -1,7 +1,8 @@
 #ifndef DETECTION_HPP
 #define DETECTION_HPP
 
-#include<string>
+#include <string>
+#include <optional>
 
 class Detection
 {
@@ -14,18 +15,18 @@ public:
 		HARMFUL
 	};
 
-	Detection(const Category &category, const std::string &name, const std::string &member_name = "");
+	Detection(const Category &category, const std::string &name, const std::optional<std::string> &member_name = std::nullopt);
 
-	Category getCategory();
+	Category getCategory() { return category;  };
 
-	std::string getName();
+	std::string getName() { return name; };
 
-	std::string getMemberName();
+	std::optional<std::string> getMemberName() { return member_name; };
 
 private:
 	Category category;
 	std::string name;
-	std::string member_name;
+	std::optional<std::string> member_name;
 
 };
 

@@ -55,8 +55,8 @@ TEST(ScanMetadata, TesttoJsonObjectWithExistingItems) {
 	auto result_object = scan_metadata.toJsonObject();
 	std::stringstream result_json_steam;
 	Poco::JSON::Stringifier::stringify(result_object, result_json_steam);
-	std::string exexpected_result = "{\"content_meta\":{\"charset\":\"charset\",\"content_length\":1," 
-		"\"content_type\":\"content_type\",\"sha1\":\"SHA1\"},\"scan_settings\":{\"allow_upstream_metadata\":true,"
-		"\"max_nested\":1,\"scan_settings\":true,\"stop_on_first\":true}}";
+	std::string exexpected_result = "{\"content_meta\":{\"charset\":\"charset\",\"content_length\":1,\"content_type\":"
+		"\"content_type\",\"sha1\":\"SHA1\",\"uri\":\"URI\"},\"scan_settings\":{\"allow_upstream_metadata\":"
+		"true,\"max_nested\":1,\"scan_settings\":true,\"stop_on_first\":true}}";
 	EXPECT_EQ(result_json_steam.str(), exexpected_result);
 }
