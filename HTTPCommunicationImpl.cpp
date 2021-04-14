@@ -10,6 +10,16 @@ void HTTPRequestImpl::setContentLength(std::streamsize length)
 	getRequest().setContentLength(length);
 }
 
+Poco::Net::HTTPRequest HTTPRequestImpl::getRequest()
+{
+	return request;
+}
+
+Poco::Net::HTTPResponse HTTPResponseImpl::getResponse()
+{
+	return response;
+}
+
 std::ostream& HTTPClientSessionImpl::sendRequest(IHTTPRequest& request)
 {
 	auto req = request.getRequest();

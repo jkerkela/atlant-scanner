@@ -23,9 +23,9 @@ namespace {
 	constexpr auto JSON_SCOPE_KEY = "scope";
 }
 
-AuthTokenFetcher::AuthTokenFetcher(const std::string &authorization_address)
+AuthTokenFetcher::AuthTokenFetcher(const std::string &authorization_address, std::unique_ptr<IHTTPClientSession> client)
 	: token_endpoint{ Poco::URI(authorization_address + std::string(API_PREFIX)) },
-	client{ std::make_unique<HTTPClientSessionImpl>(token_endpoint.getHost()) }
+	client { std::move(client) }
 {}
 
 AuthToken AuthTokenFetcher::fetch(
@@ -34,12 +34,10 @@ AuthToken AuthTokenFetcher::fetch(
 	const std::set<std::string> &scopes)
 {
 	HTTPRequestImpl tokenRequest = buildTokenRequest(client_ID, client_secret, scopes);
-	//TODO: mock HTTPRequest sendRequest to not throw, in mock class
 	std::ostream& req_stream = client->sendRequest(tokenRequest);
 	req_stream << HTTP_request_body;
 
 	HTTPResponseImpl res;
-	//TODO: mock receiveResponse to return correct fake response, in mock class 
 	std::istream& res_stream = client->receiveResponse(res);
 	try {
 		return deserializeTokenResponse(res_stream);

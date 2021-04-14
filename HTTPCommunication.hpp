@@ -5,41 +5,30 @@
 #include <Poco/Net/HTTPResponse.h>
 #include <Poco/Net/HTTPClientSession.h>
 
-
 class IHTTPRequest
 {
 public:
-	IHTTPRequest(const std::string& method, const std::string& uri) : request{ Poco::Net::HTTPRequest{ method, uri } } {};
-	Poco::Net::HTTPRequest getRequest() { return request; };
-
 	virtual void setContentType(const std::string& media_type) = 0;
 	virtual void setContentLength(std::streamsize length) = 0;
-
-private:
-	Poco::Net::HTTPRequest request;
+	virtual Poco::Net::HTTPRequest getRequest() = 0;
+	virtual ~IHTTPRequest() {};
 };
 
 class IHTTPResponse
 {
 public:
-	IHTTPResponse() : response{ Poco::Net::HTTPResponse{} } {};
-	Poco::Net::HTTPResponse getResponse() { return response; };
+	virtual Poco::Net::HTTPResponse getResponse() = 0;
+	virtual ~IHTTPResponse() {};
 
-private:
-	Poco::Net::HTTPResponse response;
 };
 
 class IHTTPClientSession
 {
 public:
-	IHTTPClientSession(const std::string& host) : session{ Poco::Net::HTTPClientSession{ host } } {};
 	virtual std::ostream& sendRequest(IHTTPRequest& request) = 0;
 	virtual std::istream& receiveResponse(IHTTPResponse& response) = 0;
-	//TODO: Fix getter
-	//Poco::Net::HTTPClientSession getSession() { return session; };
+	virtual ~IHTTPClientSession() {};
 
-protected:
-	Poco::Net::HTTPClientSession session;
 };
 
 #endif // HTTPCOMMUNICATION_HPP

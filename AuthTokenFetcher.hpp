@@ -6,6 +6,7 @@
 #include <unordered_map>
 
 #include "HTTPCommunicationImpl.hpp"
+#include "HTTPCommunication.hpp"
 #include <Poco/URI.h>
 #include <Poco/JSON/Parser.h>
 
@@ -17,7 +18,7 @@ using namespace Poco::Net;
 class AuthTokenFetcher {
 
 public:
-	AuthTokenFetcher(const std::string &authorization_address);
+	AuthTokenFetcher(const std::string &authorization_address, std::unique_ptr<IHTTPClientSession> client);
 	AuthToken fetch(
 		const std::string &client_ID,
 		const std::string &client_secret,
@@ -25,7 +26,7 @@ public:
 
 private:
 	Poco::URI token_endpoint;
-	std::unique_ptr<HTTPClientSessionImpl> client;
+	std::unique_ptr<IHTTPClientSession> client;
 	std::string HTTP_request_body;
 
 	HTTPRequestImpl buildTokenRequest(const std::string &client_ID, const std::string &client_secret, const std::set<std::string> &scopes);
