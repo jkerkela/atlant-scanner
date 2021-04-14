@@ -4,6 +4,7 @@
 #include <string>
 #include <set>
 #include <unordered_map>
+#include <memory>
 
 #include "HTTPCommunicationImpl.hpp"
 #include "HTTPCommunication.hpp"

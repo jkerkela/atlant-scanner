@@ -18,8 +18,9 @@ int main(int argc, char* argv[])
 
 	//temporary hard coded string(s), to be read from command line
 	std::set<std::string> auth_scope{ "scan" };
+	std::string auth_address{ "commandLine.getAuthorizationAddress" };
 	Authenticator authenticator{
-		std::string("commandLine.getAuthorizationAddress"),
+		std::make_unique<AuthTokenFetcher>(auth_address, std::make_unique<HTTPClientSessionImpl>(auth_address)),
 		std::string("commandLine.getClientID"),
 		std::string("commandLine.getClientSecret"),
 		auth_scope};

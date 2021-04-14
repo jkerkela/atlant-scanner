@@ -1,5 +1,6 @@
 #include "pch.h"
-#include "../AuthTokenFetcher.hpp"
+#include "../Authenticator.hpp"
+
 #include "MockHTTPCommunication.hpp"
 
 #include <sstream>
@@ -8,22 +9,30 @@ using ::testing::_;
 using ::testing::Return;
 using ::testing::ReturnRef;
 
-TEST(AuthTokenFetcher, TestConstructor) {
-	AuthTokenFetcher auth_token_fetcher{ std::string("authorization_address"), std::make_unique<HTTPClientSessionImpl>(std::string("host"))};
+TEST(Authenticator, TestConstructor) {
+	Authenticator authenticator{ std::make_unique<AuthTokenFetcher>("auth_address", std::make_unique<HTTPClientSessionImpl>("auth_address")),
+		"client_ID",
+		"client_secret",
+		std::set<std::string>{ "scope1" }
+	};
 }
 
-TEST(AuthTokenFetcher, Testfetch) {
+TEST(AuthTokenFetcher, fetchToken) {
 	//PRE: mock client session, sendRequest and receiveResponse
-	auto mockHTTPClientSessionImpl = std::make_unique<MockHTTPClientSessionImpl>() ;
+	auto mockHTTPClientSessionImpl = std::make_unique<MockHTTPClientSessionImpl>();
 	std::ostringstream buf;
 	EXPECT_CALL(*mockHTTPClientSessionImpl, sendRequest(_)).Times(1).WillOnce(ReturnRef(buf));
 	std::string response_content{ "{ \"access_token\": \"Token1\", \"token_type\" : \"bearer\", \"expires_in\" : 3600 }" };
 	std::istringstream is{ response_content };
 	EXPECT_CALL(*mockHTTPClientSessionImpl, receiveResponse(_)).Times(1).WillOnce(ReturnRef(is));
-	
-	//ACTION: create AuthTokenFetcher and call fetch()
-	AuthTokenFetcher auth_token_fetcher(std::string{ "auth_address" }, std::move(mockHTTPClientSessionImpl));
-	auto result_token = auth_token_fetcher.fetch("client_ID", "secret", std::set<std::string>{ "scope1" });
+
+	//ACTION: create Authenticator and call fetchToken()
+	Authenticator authenticator{ std::make_unique<AuthTokenFetcher>("auth_address", std::move(mockHTTPClientSessionImpl)),
+		"client_ID",
+		"client_secret",
+		std::set<std::string>{ "scope1" }
+	};
+	auto result_token = authenticator.fetchToken();
 
 	//ASSERT: Verify that received token is expected
 	AuthToken expected_token{ "Token1", 3600 };

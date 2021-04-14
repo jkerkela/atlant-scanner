@@ -3,6 +3,7 @@
 
 #include <string>
 #include <set>
+#include <memory>
 
 #include "AuthTokenFetcher.hpp"
 #include "AuthToken.hpp"
@@ -11,7 +12,7 @@ class Authenticator {
 
 public:
 	Authenticator(
-		const std::string &authorization_address,
+		std::unique_ptr<AuthTokenFetcher> auth_token_fetcher,
 		const std::string &client_ID,
 		const std::string &client_secret,
 		const std::set<std::string> &scopes);

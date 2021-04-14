@@ -40,6 +40,7 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AuthenticatorTests.cpp" />
     <ClCompile Include="AuthTokenFetcherTests.cpp" />
     <ClCompile Include="AuthTokenTests.cpp" />
     <ClCompile Include="ContentMetadataTests.cpp" />
