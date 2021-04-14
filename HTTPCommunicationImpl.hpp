@@ -11,6 +11,7 @@ public:
 	HTTPRequestImpl(const std::string& method, const std::string& uri) : request{ Poco::Net::HTTPRequest{ method, uri } } {};
 	void setContentType(const std::string& media_type) override;
 	void setContentLength(std::streamsize length) override;
+	void set(const std::string& name, const std::string& value) override;
 	Poco::Net::HTTPRequest getRequest() override;
 	virtual ~HTTPRequestImpl() {};
 
@@ -23,6 +24,9 @@ class HTTPResponseImpl : public IHTTPResponse
 public:
 	HTTPResponseImpl() : response{ Poco::Net::HTTPResponse{} } {};
 	Poco::Net::HTTPResponse getResponse() override;
+	Poco::Net::HTTPResponse::HTTPStatus getStatus() override;
+	bool has(const std::string& name) override;
+	const std::string& get(const std::string& name) override;
 	virtual ~HTTPResponseImpl() {};
 
 private:

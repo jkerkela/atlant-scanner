@@ -7,8 +7,6 @@
 #include <streambuf>
 #include <exception>
 
-#include <Poco/Net/HTTPResponse.h>
-
 using Poco::Net::HTTPResponse;
 
 namespace {
@@ -31,9 +29,9 @@ void FileScanner::refreshToken()
 
 ScanResult FileScanner::scan(ScanMetadata &metadata, std::ifstream& input)
 {
-	HTTPRequest scan_request = buildScanRequest(metadata, input);
+	HTTPRequestImpl scan_request = buildScanRequest(metadata, input);
 
-	HTTPClientSession client{ scan_endpoint.getHost() };
+	HTTPClientSessionImpl client{ scan_endpoint.getHost() };
 	std::ostream& req_stream = client.sendRequest(scan_request);
 	req_stream << HTTP_reques_body;
 
@@ -44,12 +42,12 @@ ScanResult FileScanner::poll(const std::string &poll_URL)
 {
 	auto poll_url = Poco::URI(poll_URL);
 	auto poll_req = buildPollRequest(poll_url);
-	HTTPClientSession client{ poll_url.getHost() };
+	HTTPClientSessionImpl client{ poll_url.getHost() };
 	client.sendRequest(poll_req);
 	return processPollResponse(client);
 }
 
-HTTPRequest FileScanner::buildScanRequest(ScanMetadata &metadata, std::ifstream& input)
+HTTPRequestImpl FileScanner::buildScanRequest(ScanMetadata &metadata, std::ifstream& input)
 {
 	auto metadata_body = serializeScanMetadata(metadata);
 	MultiPartRequestBuilder multipart_request_builder{};
@@ -59,26 +57,25 @@ HTTPRequest FileScanner::buildScanRequest(ScanMetadata &metadata, std::ifstream&
 	multipart_request_builder.addPart(MultiPartRequestBuilder::Part{"data", "application/octet-stream", input_str});
 	HTTP_reques_body = multipart_request_builder.encode();
 
-	//TODO: is this correct http req
 	std::string path(scan_endpoint.getPathAndQuery());
-	HTTPRequest req(HTTPRequest::HTTP_POST, path, HTTPMessage::HTTP_1_1);
+	HTTPRequestImpl req(HTTPRequest::HTTP_POST, path);
 	req.setContentType("multipart/form-data; boundary=" + multipart_request_builder.getBoundary());
 	req.set("Authorization", std::string("Bearer " + auth_token.getToken()));
 	req.setContentLength(HTTP_reques_body.length());
 	return req;
 }
 
-HTTPRequest FileScanner::buildPollRequest(const Poco::URI &poll_URL)
+HTTPRequestImpl FileScanner::buildPollRequest(const Poco::URI &poll_URL)
 {
-	HTTPRequest req(HTTPRequest::HTTP_GET, poll_URL.getPathAndQuery(), HTTPMessage::HTTP_1_1);
+	HTTPRequestImpl req(HTTPRequest::HTTP_GET, poll_URL.getPathAndQuery());
 	req.set("Authorization", std::string("Bearer " + auth_token.getToken()));
 	return req;
 }
 
-ScanResult FileScanner::processScanResponse(HTTPClientSession &client)
+ScanResult FileScanner::processScanResponse(HTTPClientSessionImpl&client)
 {
 	ScanResult scan_result{};
-	HTTPResponse res;
+	HTTPResponseImpl res;
 	std::istream& res_stream = client.receiveResponse(res);
 	auto status_code = res.getStatus();
 	if ((status_code == HTTPResponse::HTTPStatus::HTTP_OK) || (status_code == HTTPResponse::HTTPStatus::HTTP_PROCESSING)) {
@@ -117,9 +114,9 @@ ScanResult FileScanner::processScanResponse(HTTPClientSession &client)
 	return scan_result;
 }
 
-ScanResult FileScanner::processPollResponse(HTTPClientSession &client) {
+ScanResult FileScanner::processPollResponse(HTTPClientSessionImpl &client) {
 	ScanResult scan_result{};
-	HTTPResponse res;
+	HTTPResponseImpl res;
 	std::istream& res_stream = client.receiveResponse(res);
 	auto status_code = res.getStatus();
 
