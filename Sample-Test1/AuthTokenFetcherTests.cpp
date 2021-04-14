@@ -5,6 +5,10 @@
 
 #include <sstream>
 
+#include <Poco/JSON/JSON.h>
+#include <Poco/JSON/Parser.h>
+#include <Poco/Dynamic/Var.h>
+
 using ::testing::_;
 using ::testing::Return;
 using ::testing::ReturnRef;
@@ -13,17 +17,13 @@ TEST(AuthTokenFetcher, TestConstructor) {
 	AuthTokenFetcher auth_token_fetcher{ std::string("authorization_address"), std::make_unique<HTTPClientSessionImpl>(std::string("host"))};
 }
 
-
-//TODO: finalize: implement mocks using HTTPCommunication.hpp, use it, add required assert(s) and enable test
 TEST(AuthTokenFetcher, Testfetch) {
 	//PRE: mock client session, sendRequest and receiveResponse
 	auto mockHTTPClientSessionImpl = std::make_unique<MockHTTPClientSessionImpl>() ;
 	std::ostringstream buf;
-	//std::ostream os(std::cout.rdbuf());
 	EXPECT_CALL(*mockHTTPClientSessionImpl, sendRequest(_)).Times(1).WillOnce(ReturnRef(buf));
-	std::string response_content{ "\"access_token\": \"Token1\", \"token_type\" : \"bearer\", \"expires_in\" : 3600" };
+	std::string response_content{ "{ \"access_token\": \"Token1\", \"token_type\" : \"bearer\", \"expires_in\" : 3600 }" };
 	std::istringstream is{ response_content };
-	//TODO: fails at AuthtokenFetcher.cpp::108 with memory access (?) issue, should be test implementation issue
 	EXPECT_CALL(*mockHTTPClientSessionImpl, receiveResponse(_)).Times(1).WillOnce(ReturnRef(is));
 	
 	//ACTION: create AuthTokenFetcher and call fetch()

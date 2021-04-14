@@ -24,6 +24,7 @@ public:
 		const std::string &client_secret,
 		const std::set<std::string> &scopes);
 
+
 private:
 	Poco::URI token_endpoint;
 	std::unique_ptr<IHTTPClientSession> client;
@@ -32,8 +33,8 @@ private:
 	HTTPRequestImpl buildTokenRequest(const std::string &client_ID, const std::string &client_secret, const std::set<std::string> &scopes);
 	std::string encodeScopes(const std::set<std::string>& scopes);
 	std::string encodeQueryParameters(const std::unordered_map<std::string, std::string> &params);
-	AuthToken deserializeTokenResponse(std::istream& response);
 	ScanResult deserializeScanResponse(std::istream& response);
+	AuthToken deserializeTokenResponse(std::istream& response);
 	Detection buildDetection(Poco::JSON::Array::ConstIterator it);
 };
 
