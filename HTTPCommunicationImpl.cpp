@@ -40,8 +40,6 @@ const std::string& HTTPResponseImpl::get(const std::string& name)
 	return response.get(name);
 }
 
-
-
 std::ostream& HTTPClientSessionImpl::sendRequest(IHTTPRequest& request)
 {
 	auto req = request.getRequest();
@@ -52,4 +50,9 @@ std::istream& HTTPClientSessionImpl::receiveResponse(IHTTPResponse& response)
 {
 	auto res = response.getResponse();
 	return session.receiveResponse(res);
+}
+
+std::string HTTPClientSessionImpl::getURI()
+{
+	return session.getHost();
 }

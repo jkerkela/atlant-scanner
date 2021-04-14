@@ -10,13 +10,14 @@
 using Poco::Net::HTTPResponse;
 
 namespace {
-	constexpr auto API_POSTFIX = "/api/poll/v1";
+	constexpr auto API_SCAN_POSTFIX = "/api/scan/v1";
+	constexpr auto API_POLL_POSTFIX = "/api/poll/v1";
 }
 
 FileScanner::FileScanner(const std::string& scanning_address, Authenticator &authenticator)
-	: base_URI{ scanning_address },
-	scan_endpoint{ Poco::URI(scanning_address + API_POSTFIX) },
-	poll_endpoint{ Poco::URI(scanning_address + API_POSTFIX) },
+	: base_URI { Poco::URI(scanning_address)},
+	scan_endpoint{ Poco::URI(scanning_address + API_SCAN_POSTFIX) },
+	poll_endpoint{ Poco::URI(scanning_address + API_POLL_POSTFIX) },
 	authenticator{ authenticator }
 {
 	refreshToken();
@@ -27,24 +28,20 @@ void FileScanner::refreshToken()
 	auth_token = authenticator.fetchToken();
 }
 
-ScanResult FileScanner::scan(ScanMetadata &metadata, std::ifstream& input)
+ScanResult FileScanner::scan(ScanMetadata &metadata, std::ifstream& input, std::unique_ptr<IHTTPClientSession> client)
 {
 	HTTPRequestImpl scan_request = buildScanRequest(metadata, input);
-
-	HTTPClientSessionImpl client{ scan_endpoint.getHost() };
-	std::ostream& req_stream = client.sendRequest(scan_request);
+	std::ostream& req_stream = client->sendRequest(scan_request);
 	req_stream << HTTP_reques_body;
 
-	return processScanResponse(client);
+	return processScanResponse(std::move(client));
 }
 
-ScanResult FileScanner::poll(const std::string &poll_URL)
+ScanResult FileScanner::poll(std::unique_ptr<IHTTPClientSession> client, const std::string &poll_URI)
 {
-	auto poll_url = Poco::URI(poll_URL);
-	auto poll_req = buildPollRequest(poll_url);
-	HTTPClientSessionImpl client{ poll_url.getHost() };
-	client.sendRequest(poll_req);
-	return processPollResponse(client);
+	auto poll_req = buildPollRequest(poll_URI);
+	client->sendRequest(poll_req);
+	return processPollResponse(std::move(client));
 }
 
 HTTPRequestImpl FileScanner::buildScanRequest(ScanMetadata &metadata, std::ifstream& input)
@@ -57,26 +54,25 @@ HTTPRequestImpl FileScanner::buildScanRequest(ScanMetadata &metadata, std::ifstr
 	multipart_request_builder.addPart(MultiPartRequestBuilder::Part{"data", "application/octet-stream", input_str});
 	HTTP_reques_body = multipart_request_builder.encode();
 
-	std::string path(scan_endpoint.getPathAndQuery());
-	HTTPRequestImpl req(HTTPRequest::HTTP_POST, path);
+	HTTPRequestImpl req(HTTPRequest::HTTP_POST, scan_endpoint.getPathAndQuery());
 	req.setContentType("multipart/form-data; boundary=" + multipart_request_builder.getBoundary());
 	req.set("Authorization", std::string("Bearer " + auth_token.getToken()));
 	req.setContentLength(HTTP_reques_body.length());
 	return req;
 }
 
-HTTPRequestImpl FileScanner::buildPollRequest(const Poco::URI &poll_URL)
+HTTPRequestImpl FileScanner::buildPollRequest(const std::string &poll_URL)
 {
-	HTTPRequestImpl req(HTTPRequest::HTTP_GET, poll_URL.getPathAndQuery());
+	HTTPRequestImpl req(HTTPRequest::HTTP_GET, poll_URL);
 	req.set("Authorization", std::string("Bearer " + auth_token.getToken()));
 	return req;
 }
 
-ScanResult FileScanner::processScanResponse(HTTPClientSessionImpl&client)
+ScanResult FileScanner::processScanResponse(std::unique_ptr<IHTTPClientSession> client)
 {
 	ScanResult scan_result{};
 	HTTPResponseImpl res;
-	std::istream& res_stream = client.receiveResponse(res);
+	std::istream& res_stream = client->receiveResponse(res);
 	auto status_code = res.getStatus();
 	if ((status_code == HTTPResponse::HTTPStatus::HTTP_OK) || (status_code == HTTPResponse::HTTPStatus::HTTP_PROCESSING)) {
 		try {
@@ -114,10 +110,10 @@ ScanResult FileScanner::processScanResponse(HTTPClientSessionImpl&client)
 	return scan_result;
 }
 
-ScanResult FileScanner::processPollResponse(HTTPClientSessionImpl &client) {
+ScanResult FileScanner::processPollResponse(std::unique_ptr<IHTTPClientSession> client) {
 	ScanResult scan_result{};
 	HTTPResponseImpl res;
-	std::istream& res_stream = client.receiveResponse(res);
+	std::istream& res_stream = client->receiveResponse(res);
 	auto status_code = res.getStatus();
 
 	if (status_code == HTTPResponse::HTTPStatus::HTTP_OK) {
@@ -214,7 +210,7 @@ ScanResult FileScanner::deserializeScanResponse(std::istream& response)
 		scan_result = ScanResult::Result::HARMFUL;
 	}
 	else {
-		throw new APIException("Invalid detection category");
+		throw new APIException("Invalid scan result category");
 	}
 
 	std::list<Detection> detections{};

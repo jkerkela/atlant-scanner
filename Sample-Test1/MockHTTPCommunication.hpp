@@ -13,6 +13,7 @@ public:
 	MockHTTPClientSessionImpl() {};
 	MOCK_METHOD1(sendRequest, std::ostream& (IHTTPRequest& request)) {};
 	MOCK_METHOD1(receiveResponse, std::istream& (IHTTPResponse& response)) {};
+	MOCK_METHOD0(getURI, std::string()) {};
 
 	virtual ~MockHTTPClientSessionImpl() {};
 };

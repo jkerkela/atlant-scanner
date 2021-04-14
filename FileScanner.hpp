@@ -5,8 +5,8 @@
 #include <fstream>
 #include <optional>
 
-#include <Poco/URI.h>
 #include <Poco/JSON/Parser.h>
+#include <Poco/URI.h>
 
 #include "Authenticator.hpp"
 #include "AuthToken.hpp"
@@ -21,8 +21,10 @@ class FileScanner {
 public:
 	FileScanner(const std::string &scanning_address, Authenticator &authenticator);
 	void refreshToken();
-	ScanResult scan(ScanMetadata &metadata, std::ifstream &input);
-	ScanResult poll(const std::string& poll_URL);
+	ScanResult scan(ScanMetadata &metadata, std::ifstream &input, std::unique_ptr<IHTTPClientSession> client);
+	ScanResult poll(std::unique_ptr<IHTTPClientSession> client, const std::string &poll_URL);
+	Poco::URI getScanAddress() { return scan_endpoint; };
+	Poco::URI getAddress() { return base_URI; };
 
 private:
 	Poco::URI base_URI;
@@ -33,10 +35,10 @@ private:
 	std::string HTTP_reques_body;
 
 	HTTPRequestImpl buildScanRequest(ScanMetadata &metadata, std::ifstream &input);
-	HTTPRequestImpl buildPollRequest(const Poco::URI& poll_URL);
+	HTTPRequestImpl buildPollRequest(const std::string& poll_URL);
 	std::string serializeScanMetadata(ScanMetadata &metadata);
-	ScanResult processScanResponse(HTTPClientSessionImpl &client);
-	ScanResult processPollResponse(HTTPClientSessionImpl &client);
+	ScanResult processScanResponse(std::unique_ptr<IHTTPClientSession> client);
+	ScanResult processPollResponse(std::unique_ptr<IHTTPClientSession> client);
 	ScanResult deserializeScanResponse(std::istream &response);
 	Detection buildDetection(Poco::JSON::Array::ConstIterator it);
 };
