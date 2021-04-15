@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "../ScanSettings.hpp"
+#include "ScanSettings.hpp"
 
 #include <iostream>
 

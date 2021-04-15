@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "../FileScanner.hpp"
+#include "FileScanner.hpp"
 #include "MockHTTPCommunication.hpp"
 
 #include <Poco/Net/NetException.h>

@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "../Authenticator.hpp"
+#include "Authenticator.hpp"
 
 #include "MockHTTPCommunication.hpp"
 

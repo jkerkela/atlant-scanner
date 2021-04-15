@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "../ContentMetadata.hpp"
+#include "ContentMetadata.hpp"
 
 #include <iostream>
 

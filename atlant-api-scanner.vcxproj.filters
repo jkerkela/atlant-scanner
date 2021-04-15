@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
     <Filter Include="Source Files">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
@@ -9,93 +13,89 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AtlantScanner.cpp">
+    <ClCompile Include="src\AtlantScanner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FileScanner.cpp">
+    <ClCompile Include="src\Authenticator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Authenticator.cpp">
+    <ClCompile Include="src\AuthToken.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AuthTokenFetcher.cpp">
+    <ClCompile Include="src\AuthTokenFetcher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AuthToken.cpp">
+    <ClCompile Include="src\ContentMetadata.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ScanResult.cpp">
+    <ClCompile Include="src\Detection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Detection.cpp">
+    <ClCompile Include="src\FileScanner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ScanMetadata.cpp">
+    <ClCompile Include="src\HTTPCommunicationImpl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ScanSettings.cpp">
+    <ClCompile Include="src\MultipartRequestBuilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ContentMetadata.cpp">
+    <ClCompile Include="src\ScanMetadata.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ScanPoller.cpp">
+    <ClCompile Include="src\ScanPoller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MultipartRequestBuilder.cpp">
+    <ClCompile Include="src\ScanResult.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HTTPCommunicationImpl.cpp">
+    <ClCompile Include="src\ScanSettings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FileScanner.hpp">
+    <ClInclude Include="include\Authenticator.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Authenticator.hpp">
+    <ClInclude Include="include\AuthToken.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AuthTokenFetcher.hpp">
+    <ClInclude Include="include\AuthTokenFetcher.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AuthToken.hpp">
+    <ClInclude Include="include\ContentMetadata.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ScanResult.hpp">
+    <ClInclude Include="include\Detection.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Detection.hpp">
+    <ClInclude Include="include\FileScanner.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="APIException.hpp">
+    <ClInclude Include="include\HTTPCommunication.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ScanMetadata.hpp">
+    <ClInclude Include="include\HTTPCommunicationImpl.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ScanSettings.hpp">
+    <ClInclude Include="include\MultipartRequestBuilder.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ScanPoller.hpp">
+    <ClInclude Include="include\ScanMetadata.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MultipartRequestBuilder.hpp">
+    <ClInclude Include="include\ScanPoller.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ContentMetadata.hpp">
+    <ClInclude Include="include\ScanResult.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HTTPCommunication.hpp">
+    <ClInclude Include="include\ScanSettings.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HTTPCommunicationImpl.hpp">
+    <ClInclude Include="include\APIException.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

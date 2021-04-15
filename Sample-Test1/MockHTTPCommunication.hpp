@@ -3,7 +3,7 @@
 #include "pch.h"
 #include "gmock/gmock.h"
 
-#include "../HTTPCommunication.hpp"
+#include "HTTPCommunication.hpp"
 
 #include <string>
 

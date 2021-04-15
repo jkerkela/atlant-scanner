@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "../ScanResult.hpp"
+#include "ScanResult.hpp"
 
 TEST(ScanResult, TestConstructorWithDefaultParams) {
 	std::list<Detection> detections{ Detection{Detection::Category::SUSPICIOUS, "some_detection"} };

@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "../AuthToken.hpp"
+#include "AuthToken.hpp"
 
 TEST(AuthToken, TestConstructor) {
 	AuthToken auth_token{ "token", 1 };

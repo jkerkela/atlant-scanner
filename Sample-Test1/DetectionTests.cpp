@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "../Detection.hpp"
+#include "Detection.hpp"
 
 TEST(Detection, TestConstructorWithDefaultParams) {
 	Detection detection{ Detection::Category::SUSPICIOUS, "name" };

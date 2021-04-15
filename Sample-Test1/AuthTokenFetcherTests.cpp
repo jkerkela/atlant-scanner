@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "../AuthTokenFetcher.hpp"
+#include "AuthTokenFetcher.hpp"
 #include "MockHTTPCommunication.hpp"
 
 #include <sstream>
