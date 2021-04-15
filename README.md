@@ -4,8 +4,9 @@
 C++ example implementation for F-Secure Atlant API file scanning (https://help.f-secure.com/product.html#business/atlant/latest/en/concept_C10CD401FFA94772AF3D88E0D2DC6710-latest-en)
 
 ## Integration
-Project is build as VS solution.
-NOTE: The libary linking is not complete, all dependency libraries needs to be precompiled to, added to and used from external/libs. 
+Project is build as VS solution. 
+NOTE: Implementation is not tested with live server (see: Things to do).
+NOTE: The libary linking is not complete, all dependency libraries needs to be precompiled to, added to and used from external/libs (see: Things to do). 
 Currently linking problem is circumnvented by adding requried libs manually to output folder.
 
 3rd party dependencies:
@@ -20,7 +21,7 @@ Currently linking problem is circumnvented by adding requried libs manually to o
   - Finalize implementation: (see //TODO items on sources)
     - Implement command line argument parser to AtlantScanner.cpp
 	- Implement result printing to AtlantScanner.cpp
-	- Encapsulate ~all 3rd access behind interface classes
+	- Encapsulate ~all 3rd party lib accessing code behind interface classes
 	- Add unit tests for classes that are missing them
 	- Fix libary linking / VS project configs
 	- Add cmake build support
