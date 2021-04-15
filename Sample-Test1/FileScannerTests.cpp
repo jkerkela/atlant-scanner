@@ -22,6 +22,9 @@ TEST(FileScanner, TestConstructorWithNonAccessibleAuthAddress) {
 	EXPECT_THROW(FileScanner("some_scannig_address", authenticator), NetException);
 }
 
+//TODO: make test class for FileScanner and use it by TEST_F to avoid duplicate code, you will have problems with smart pointers on test class,
+// because smart pointer ownership is given to Authenticator and FileScanner on call(s)
+
 TEST(FileScanner, TestpollWithValidResponseJSON) {
 	//PRE: Mock client session, sendRequest, receiveResponse for auth token requests
 	auto mock_client_session_for_auth = std::make_unique<MockHTTPClientSessionImpl>();
