@@ -4,7 +4,7 @@
 C++ example implementation for F-Secure Atlant API file scanning (https://help.f-secure.com/product.html#business/atlant/latest/en/concept_C10CD401FFA94772AF3D88E0D2DC6710-latest-en)
 
 ## Integration
-Project is build as VS solution. 
+Project is build as VS solution. Project uses C++ 17.
 NOTE: Implementation is not tested with live server (see: Things to do).
 NOTE: The libary linking is not complete, all dependency libraries needs to be precompiled to, added to and used from external/libs (see: Things to do). 
 Currently linking problem is circumnvented by adding requried libs manually to output folder.
