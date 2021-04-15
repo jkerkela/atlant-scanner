@@ -43,7 +43,7 @@ AuthToken AuthTokenFetcher::fetch(
 		return deserializeTokenResponse(res_stream);
 	}
 	catch (Poco::JSON::JSONException e) {
-		throw new APIException("Invalid token fetch response: " + std::string(e.what()));
+		throw APIException("Invalid token fetch response: " + std::string(e.what()));
 	}
 }
 
@@ -130,7 +130,7 @@ Detection AuthTokenFetcher::buildDetection(Poco::JSON::Array::ConstIterator it) 
 		category = Detection::Category::HARMFUL;
 	}
 	else {
-		throw new APIException("Invalid detection category");
+		throw APIException("Invalid detection category");
 	}
 
 	auto name = object->getValue<std::string>("name");
@@ -153,7 +153,7 @@ ScanResult AuthTokenFetcher::deserializeScanResponse(std::istream& response)
 		status = ScanResult::Status::PENDING;
 	} 
 	else {
-		throw new APIException("Invalid scan status");
+		throw APIException("Invalid scan status");
 	}
 
 	auto scan_res = object->getValue<std::string>("scan_result");
@@ -177,7 +177,7 @@ ScanResult AuthTokenFetcher::deserializeScanResponse(std::istream& response)
 		scan_result = ScanResult::Result::HARMFUL;
 	}
 	else {
-		throw new APIException("Invalid detection category");
+		throw APIException("Invalid detection category");
 	}
 
 	std::list<Detection> detections{};

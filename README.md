@@ -20,5 +20,7 @@ Currently linking problem is circumnvented by adding requried libs manually to o
   - Finalize implementation: (see //TODO items on sources)
     - Implement command line argument parser to AtlantScanner.cpp
 	- Implement result printing to AtlantScanner.cpp
+	- Encapsulate ~all 3rd access behind interface classes
+	- Add unit tests for classes that are missing them
 	- Fix libary linking / VS project configs
 	- Add cmake build support

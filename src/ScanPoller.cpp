@@ -37,5 +37,5 @@ ScanResult ScanPoller::scan(ScanMetadata &metadata, std::ifstream file_stream)
 		}
 		return result;
 	}
-	throw new std::runtime_error("Unknown scan status");
+	throw std::runtime_error("Unknown scan status");
 }

@@ -79,23 +79,23 @@ ScanResult FileScanner::processScanResponse(std::unique_ptr<IHTTPClientSession> 
 			scan_result = deserializeScanResponse(res_stream);
 		}
 		catch (const std::exception &e) {
-			throw new APIException("Invalid scan response:" + std::string(e.what()));
+			throw APIException("Invalid scan response:" + std::string(e.what()));
 		}
 	}
 	else {
-		throw new APIException("Unexpected response from scanning service");
+		throw APIException("Unexpected response from scanning service");
 	}
 
 	if (status_code == HTTPResponse::HTTPStatus::HTTP_PROCESSING) {
 		if (!res.has("Location")) {
-			throw new APIException("Missing poll URL");
+			throw APIException("Missing poll URL");
 		}
 		auto location = res.get("Location");
 
 		scan_result.setPollURL(location);
 
 		if (!res.has("Retry-After")) {
-			throw new APIException("Missing retry after duration");
+			throw APIException("Missing retry after duration");
 		}
 
 		auto retry = res.get("Retry-After");
@@ -103,7 +103,7 @@ ScanResult FileScanner::processScanResponse(std::unique_ptr<IHTTPClientSession> 
 			scan_result.setRetryAfter(std::stoi(retry));
 		}
 		catch (const std::invalid_argument &e) {
-			throw new APIException("Invalid retry after duration: " + std::string(e.what()));
+			throw APIException("Invalid retry after duration: " + std::string(e.what()));
 		}
 	}
 
@@ -121,24 +121,24 @@ ScanResult FileScanner::processPollResponse(std::unique_ptr<IHTTPClientSession> 
 			scan_result = deserializeScanResponse(res_stream);
 		}
 		catch (const std::exception& e) {
-			throw new APIException("Invalid scan response:" + std::string(e.what()));
+			throw APIException("Invalid scan response:" + std::string(e.what()));
 		}
 	}
 	else {
-		throw new APIException("Unexpected response from scanning service");
+		throw APIException("Unexpected response from scanning service");
 	}
 
 	if (scan_result.getStatus() == ScanResult::Status::PENDING) {
 
 		if (!res.has("Retry-After")) {
-			throw new APIException("Missing retry after duration");
+			throw APIException("Missing retry after duration");
 		}
 		auto retry = res.get("Retry-After");
 		try {
 			scan_result.setRetryAfter(std::stoi(retry));
 		}
 		catch (const std::invalid_argument& e) {
-			throw new APIException("Invalid retry after duration: " + std::string(e.what()));
+			throw APIException("Invalid retry after duration: " + std::string(e.what()));
 		}
 	}
 	return scan_result;
@@ -163,7 +163,7 @@ Detection FileScanner::buildDetection(Poco::JSON::Array::ConstIterator it)
 		category = Detection::Category::HARMFUL;
 	}
 	else {
-		throw new APIException("Invalid detection category");
+		throw APIException("Invalid detection category");
 	}
 
 	auto name = object->getValue<std::string>("name");
@@ -186,7 +186,7 @@ ScanResult FileScanner::deserializeScanResponse(std::istream& response)
 		status = ScanResult::Status::PENDING;
 	}
 	else {
-		throw new APIException("Invalid scan status");
+		throw APIException("Invalid scan status");
 	}
 
 	auto scan_res = object->getValue<std::string>("scan_result");
@@ -210,7 +210,7 @@ ScanResult FileScanner::deserializeScanResponse(std::istream& response)
 		scan_result = ScanResult::Result::HARMFUL;
 	}
 	else {
-		throw new APIException("Invalid scan result category");
+		throw APIException("Invalid scan result category");
 	}
 
 	std::list<Detection> detections{};

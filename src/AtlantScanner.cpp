@@ -32,8 +32,8 @@ int main(int argc, char* argv[])
 		ScanPoller scanPoller{fileScanner};
 		std::string file{"commandLine.getInputFile"};
 		auto result = scanPoller.scan(metadata, file);
-		//TODO: continue here
-		//reference: https://github.com/F-Secure/atlant-api/blob/9bfac23491f555fceea7485fe9bf4edb35485893/java/scanner/src/main/com/fsecure/atlant/examples/scanner/AtlantScannerRunner.java#L31
+		//TODO: implement result printer as:
+		//https://github.com/F-Secure/atlant-api/blob/9bfac23491f555fceea7485fe9bf4edb35485893/java/scanner/src/main/com/fsecure/atlant/examples/scanner/AtlantScannerRunner.java#L31
 	}
 	catch (std::exception e) {
 		std::cerr << "Error: " << e.what() << std::endl;
