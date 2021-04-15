@@ -1,10 +1,10 @@
 #ifndef SCANMETADATA_HPP
 #define SCANMETADATA_HPP
 
-#include<optional>
-
-#include "ScanSettings.hpp"
 #include "ContentMetadata.hpp"
+#include "ScanSettings.hpp"
+
+#include<optional>
 
 #include <Poco/JSON/Object.h>
 

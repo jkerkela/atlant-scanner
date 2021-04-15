@@ -1,13 +1,13 @@
 #ifndef SCANPOLLER_HPP
 #define SCANPOLLER_HPP
 
-#include <string>
-#include <fstream>
-#include <optional>
-
 #include "FileScanner.hpp"
 #include "ScanMetadata.hpp"
 #include "ScanResult.hpp"
+
+#include <string>
+#include <fstream>
+#include <optional>
 
 class ScanPoller {
 

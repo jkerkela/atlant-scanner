@@ -13,5 +13,4 @@ private:
 	std::runtime_error api_exception;
 };
 
-
 #endif // APIEXCEPTION_HPP

@@ -2,6 +2,7 @@
 #define SCANSETTINGS_HPP
 
 #include <optional>
+
 #include <Poco/JSON/Object.h>
 
 class ScanSettings {

@@ -1,18 +1,18 @@
 #ifndef FILESCANNER_HPP
 #define FILESCANNER_HPP
 
+#include "Authenticator.hpp"
+#include "AuthToken.hpp"
+#include "HTTPCommunicationImpl.hpp"
+#include "ScanResult.hpp"
+#include "ScanMetadata.hpp"
+
 #include <string>
 #include <fstream>
 #include <optional>
 
 #include <Poco/JSON/Parser.h>
 #include <Poco/URI.h>
-
-#include "Authenticator.hpp"
-#include "AuthToken.hpp"
-#include "ScanResult.hpp"
-#include "ScanMetadata.hpp"
-#include "HTTPCommunicationImpl.hpp"
 
 using namespace Poco::Net;
 

@@ -1,18 +1,18 @@
 #ifndef AUTHTOKENFETCHER_HPP
 #define AUTHTOKENFETCHER_HPP
 
+#include "AuthToken.hpp"
+#include "ScanResult.hpp"
+#include "HTTPCommunicationImpl.hpp"
+#include "HTTPCommunication.hpp"
+
 #include <string>
 #include <set>
 #include <unordered_map>
 #include <memory>
 
-#include "HTTPCommunicationImpl.hpp"
-#include "HTTPCommunication.hpp"
 #include <Poco/URI.h>
 #include <Poco/JSON/Parser.h>
-
-#include "AuthToken.hpp"
-#include "ScanResult.hpp"
 
 using namespace Poco::Net;
 

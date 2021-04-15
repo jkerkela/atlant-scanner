@@ -51,8 +51,3 @@ std::istream& HTTPClientSessionImpl::receiveResponse(IHTTPResponse& response)
 	auto res = response.getResponse();
 	return session.receiveResponse(res);
 }
-
-std::string HTTPClientSessionImpl::getURI()
-{
-	return session.getHost();
-}

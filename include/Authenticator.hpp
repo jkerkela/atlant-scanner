@@ -1,12 +1,13 @@
 #ifndef AUTHENTICATOR_HPP
 #define AUTHENTICATOR_HPP
 
+#include "AuthToken.hpp"
+#include "AuthTokenFetcher.hpp"
+
 #include <string>
 #include <set>
 #include <memory>
 
-#include "AuthTokenFetcher.hpp"
-#include "AuthToken.hpp"
 
 class Authenticator {
 

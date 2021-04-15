@@ -39,7 +39,6 @@ public:
 	HTTPClientSessionImpl(const std::string& host) : session{ Poco::Net::HTTPClientSession{ host } } {};
 	std::ostream& sendRequest(IHTTPRequest& request) override;
 	std::istream& receiveResponse(IHTTPResponse& response) override;
-	std::string getURI() override;
 	virtual ~HTTPClientSessionImpl() {};
 
 protected:

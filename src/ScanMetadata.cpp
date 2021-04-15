@@ -10,10 +10,8 @@ Poco::JSON::Object::Ptr ScanMetadata::toJsonObject()
 	if (scan_settings != std::nullopt) {
 		json_object->set("scan_settings", scan_settings.value().toJsonObject());
 	}
-
 	if (content_metadata != std::nullopt) {
 		json_object->set("content_meta", content_metadata.value().toJsonObject());
 	}
-
 	return json_object;
 }

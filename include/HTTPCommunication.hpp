@@ -31,7 +31,6 @@ class IHTTPClientSession
 public:
 	virtual std::ostream& sendRequest(IHTTPRequest& request) = 0;
 	virtual std::istream& receiveResponse(IHTTPResponse& response) = 0;
-	virtual std::string getURI() = 0;
 	virtual ~IHTTPClientSession() {};
 
 };
