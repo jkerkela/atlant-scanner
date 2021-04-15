@@ -29,14 +29,16 @@ public:
 		const ScanResult::Result &result,
 		const std::list<Detection> &detections,
 		const std::optional<int> retry_after = std::nullopt,
-		const std::optional<std::string> poll_URL = std::nullopt);
-	Status getStatus();
-	Result getResult();
-	std::list<Detection> getDetections();
-	std::optional<std::string> getPollURL();
-	std::optional<int> getRetryAfter();
-	void setPollURL(const std::string& poll_url);
-	void setRetryAfter(const int time);
+		const std::optional<std::string> poll_URL = std::nullopt)
+		: status{ status }, result{ result }, detections{ detections }, retry_after{ retry_after }, poll_URL{ poll_URL } {};
+
+	Status getStatus() { return status; };
+	Result getResult() { return result; };
+	std::list<Detection> getDetections() { return detections; };
+	std::optional<std::string> getPollURL() { return poll_URL; };
+	std::optional<int> getRetryAfter() { return retry_after; };
+	void setPollURL(const std::string& poll_url) { poll_URL = poll_url; };
+	void setRetryAfter(const int time) { retry_after = time; };
 
 private:
 	Status status;

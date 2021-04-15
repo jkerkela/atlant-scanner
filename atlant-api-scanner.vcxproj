@@ -133,16 +133,13 @@
   <ItemGroup>
     <ClCompile Include="src\AtlantScanner.cpp" />
     <ClCompile Include="src\Authenticator.cpp" />
-    <ClCompile Include="src\AuthToken.cpp" />
     <ClCompile Include="src\AuthTokenFetcher.cpp" />
     <ClCompile Include="src\ContentMetadata.cpp" />
-    <ClCompile Include="src\Detection.cpp" />
     <ClCompile Include="src\FileScanner.cpp" />
     <ClCompile Include="src\HTTPCommunicationImpl.cpp" />
     <ClCompile Include="src\MultipartRequestBuilder.cpp" />
     <ClCompile Include="src\ScanMetadata.cpp" />
     <ClCompile Include="src\ScanPoller.cpp" />
-    <ClCompile Include="src\ScanResult.cpp" />
     <ClCompile Include="src\ScanSettings.cpp" />
   </ItemGroup>
   <ItemGroup>
