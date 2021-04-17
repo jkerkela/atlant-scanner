@@ -89,5 +89,1384 @@
     <ClInclude Include="include\APIException.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Dynamic\Pair.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Dynamic\Struct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Dynamic\Var.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Dynamic\VarHolder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Dynamic\VarIterator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\AbstractCache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\AbstractDelegate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\AbstractEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\AbstractObserver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\AbstractPriorityDelegate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\AbstractStrategy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\AccessExpirationDecorator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\AccessExpireCache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\AccessExpireLRUCache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\AccessExpireStrategy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ActiveDispatcher.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ActiveMethod.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ActiveResult.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ActiveRunnable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ActiveStarter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Activity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Alignment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Any.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ArchiveStrategy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Array.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Ascii.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ASCIIEncoding.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\AsyncChannel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\AtomicCounter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\AtomicFlag.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\AutoPtr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\AutoReleasePool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Base32Decoder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Base32Encoder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Base64Decoder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Base64Encoder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\BasicEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\BinaryReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\BinaryWriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Buffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\BufferAllocator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\BufferedBidirectionalStreamBuf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\BufferedStreamBuf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Bugcheck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ByteOrder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Channel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Checksum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ClassLibrary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ClassLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Clock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Condition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Configurable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ConsoleChannel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\CountingStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\DataURIStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\DataURIStreamFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\DateTime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\DateTimeFormat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\DateTimeFormatter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\DateTimeParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Debugger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\DefaultStrategy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\DeflatingStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Delegate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\DigestEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\DigestStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\DirectoryIterator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\DirectoryIterator_UNIX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\DirectoryIterator_WIN32U.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\DirectoryIteratorStrategy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\DirectoryWatcher.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\DynamicAny.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\DynamicAnyHolder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\DynamicFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\DynamicStruct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Environment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Environment_UNIX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Environment_VX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Environment_WIN32U.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Environment_WINCE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Error.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ErrorHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Event_POSIX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Event_VX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Event_WIN32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\EventArgs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\EventChannel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\EventLogChannel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Exception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ExpirationDecorator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Expire.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ExpireCache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ExpireLRUCache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ExpireStrategy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\FIFOBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\FIFOBufferStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\FIFOEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\FIFOStrategy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\File.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\File_UNIX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\File_VX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\File_WIN32U.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\File_WINCE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\FileChannel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\FileStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\FileStream_POSIX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\FileStream_WIN32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\FileStreamFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Format.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Formatter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\FormattingChannel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Foundation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\FPEnvironment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\FPEnvironment_C99.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\FPEnvironment_DEC.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\FPEnvironment_DUMMY.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\FPEnvironment_QNX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\FPEnvironment_SUN.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\FPEnvironment_WIN32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\FunctionDelegate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\FunctionPriorityDelegate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Glob.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Hash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\HashFunction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\HashMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\HashSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\HashStatistic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\HashTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\HexBinaryDecoder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\HexBinaryEncoder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\HMACEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\InflatingStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Instantiator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\JSONString.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\KeyValueArgs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Latin1Encoding.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Latin2Encoding.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Latin9Encoding.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\LinearHashTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\LineEndingConverter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ListMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\LocalDateTime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\LogFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\LogFile_STD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\LogFile_WIN32U.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Logger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\LoggingFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\LoggingRegistry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\LogStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\LRUCache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\LRUStrategy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Manifest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\MD4Engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\MD5Engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\MemoryPool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\MemoryStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Message.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\MetaObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\MetaProgramming.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Mutex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Mutex_POSIX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Mutex_VX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Mutex_WIN32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Mutex_WINCE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\NamedEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\NamedEvent_Android.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\NamedEvent_UNIX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\NamedEvent_WIN32U.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\NamedMutex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\NamedMutex_Android.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\NamedMutex_UNIX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\NamedMutex_WIN32U.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\NamedTuple.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\NestedDiagnosticContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\NObserver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Notification.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\NotificationCenter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\NotificationQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\NotificationStrategy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Nullable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\NullChannel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\NullStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\NumberFormatter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\NumberParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\NumericString.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ObjectPool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Observer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Optional.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ordered_hash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ordered_map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ordered_set.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\OrderedMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\OrderedSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Path.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Path_UNIX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Path_WIN32U.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Path_WINCE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\PatternFormatter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\PBKDF2Engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Pipe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\PipeImpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\PipeImpl_DUMMY.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\PipeImpl_POSIX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\PipeImpl_WIN32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\PipeStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Platform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Platform_POSIX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Platform_VX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Platform_WIN32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Poco.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\PriorityDelegate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\PriorityEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\PriorityExpire.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\PriorityNotificationQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\PriorityStrategy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Process.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Process_UNIX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Process_VX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Process_WIN32U.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Process_WINCE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\PurgeStrategy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Random.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\RandomStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\RecursiveDirectoryIterator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\RecursiveDirectoryIteratorImpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\RefCountedObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\RegularExpression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\RotateStrategy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Runnable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\RunnableAdapter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\RWLock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\RWLock_Android.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\RWLock_POSIX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\RWLock_VX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\RWLock_WIN32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\RWLock_WINCE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ScopedLock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ScopedUnlock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Semaphore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Semaphore_POSIX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Semaphore_VX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Semaphore_WIN32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\SHA1Engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\SHA2Engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\SharedLibrary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\SharedLibrary_HPUX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\SharedLibrary_UNIX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\SharedLibrary_VX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\SharedLibrary_WIN32U.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\SharedMemory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\SharedMemory_DUMMY.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\SharedMemory_POSIX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\SharedMemory_WIN32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\SharedPtr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\SignalHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\SimpleFileChannel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\SimpleHashTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\SingletonHolder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\SortedDirectoryIterator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\SplitterChannel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Stopwatch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\StrategyCollection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\StreamChannel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\StreamConverter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\StreamCopier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\StreamTokenizer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\StreamUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\String.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\StringTokenizer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\SynchronizedObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\SyslogChannel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Task.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\TaskManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\TaskNotification.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\TeeStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\TemporaryFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\TextBufferIterator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\TextConverter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\TextEncoding.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\TextIterator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Thread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Thread_POSIX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Thread_VX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Thread_WIN32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Thread_WINCE.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ThreadLocal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ThreadPool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ThreadTarget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\TimedNotificationQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Timespan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Timestamp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Timezone.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Token.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Tuple.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\TypeList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\UnbufferedStreamBuf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Unicode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\UnicodeConverter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\UniqueAccessExpireCache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\UniqueAccessExpireLRUCache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\UniqueAccessExpireStrategy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\UniqueExpireCache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\UniqueExpireLRUCache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\UniqueExpireStrategy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\UnWindows.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\URI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\URIStreamFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\URIStreamOpener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\UTF8Encoding.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\UTF8String.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\UTF16Encoding.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\UTF32Encoding.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\UTFString.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\UUID.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\UUIDGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\ValidArgs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Void.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Windows1250Encoding.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Windows1251Encoding.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\Windows1252Encoding.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\WindowsConsoleChannel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\zconf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Foundation\include\Poco\zlib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\JSON\include\Poco\JSON\Array.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\JSON\include\Poco\JSON\Handler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\JSON\include\Poco\JSON\JSON.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\JSON\include\Poco\JSON\JSONException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\JSON\include\Poco\JSON\Object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\JSON\include\Poco\JSON\ParseHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\JSON\include\Poco\JSON\Parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\JSON\include\Poco\JSON\ParserImpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\JSON\include\Poco\JSON\PrintHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\JSON\include\Poco\JSON\Query.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\JSON\include\Poco\JSON\Stringifier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\JSON\include\Poco\JSON\Template.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\JSON\include\Poco\JSON\TemplateCache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\AbstractHTTPRequestHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\DatagramSocket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\DatagramSocketImpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\DialogSocket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\DNS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\EscapeHTMLStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\FilePartSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\FTPClientSession.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\FTPStreamFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HostEntry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTMLForm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPAuthenticationParams.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPBasicCredentials.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPBasicStreamBuf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPBufferAllocator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPChunkedStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPClientSession.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPCookie.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPCredentials.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPDigestCredentials.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPFixedLengthStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPHeaderStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPIOStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPMessage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPNTLMCredentials.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPRequest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPRequestHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPRequestHandlerFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPResponse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPServer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPServerConnection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPServerConnectionFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPServerParams.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPServerRequest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPServerRequestImpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPServerResponse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPServerResponseImpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPServerSession.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPSession.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPSessionFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPSessionInstantiator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\HTTPStreamFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\ICMPClient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\ICMPEventArgs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\ICMPPacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\ICMPPacketImpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\ICMPSocket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\ICMPSocketImpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\ICMPv4PacketImpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\IPAddress.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\IPAddressImpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\MailMessage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\MailRecipient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\MailStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\MediaType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\MessageHeader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\MulticastSocket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\MultipartReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\MultipartWriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\MultiSocketPoller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\NameValueCollection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\Net.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\NetException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\NetworkInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\NTLMCredentials.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\NTPClient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\NTPEventArgs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\NTPPacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\NullPartHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\OAuth10Credentials.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\OAuth20Credentials.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\ParallelSocketAcceptor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\ParallelSocketReactor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\PartHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\PartSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\PartStore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\PollSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\POP3ClientSession.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\QuotedPrintableDecoder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\QuotedPrintableEncoder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\RawSocket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\RawSocketImpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\RemoteSyslogChannel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\RemoteSyslogListener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\ServerSocket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\ServerSocketImpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\SingleSocketPoller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\SMTPChannel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\SMTPClientSession.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\Socket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\SocketAcceptor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\SocketAddress.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\SocketAddressImpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\SocketConnector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\SocketDefs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\SocketImpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\SocketNotification.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\SocketNotifier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\SocketReactor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\SocketStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\SSPINTLMCredentials.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\StreamSocket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\StreamSocketImpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\StringPartSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\TCPServer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\TCPServerConnection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\TCPServerConnectionFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\TCPServerDispatcher.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\TCPServerParams.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\UDPClient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\UDPHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\UDPServer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\UDPServerParams.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\UDPSocketReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\WebSocket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\WebSocketImpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="external\libs\PocoFoundationd.dll" />
+    <None Include="external\libs\PocoJSONd.dll" />
+    <None Include="external\libs\PocoNetd.dll" />
   </ItemGroup>
 </Project>
