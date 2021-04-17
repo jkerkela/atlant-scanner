@@ -29,7 +29,6 @@ public:
 private:
 	Poco::URI token_endpoint;
 	std::unique_ptr<IHTTPClientSession> client;
-	std::string HTTP_request_body;
 
 	HTTPRequestImpl buildTokenRequest(const std::string &client_ID, const std::string &client_secret, const std::set<std::string> &scopes);
 	std::string encodeScopes(const std::set<std::string>& scopes);

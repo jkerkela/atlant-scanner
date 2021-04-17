@@ -34,8 +34,7 @@ AuthToken AuthTokenFetcher::fetch(
 	const std::set<std::string> &scopes)
 {
 	HTTPRequestImpl tokenRequest = buildTokenRequest(client_ID, client_secret, scopes);
-	std::ostream& req_stream = client->sendRequest(tokenRequest);
-	req_stream << HTTP_request_body;
+	client->sendRequest(tokenRequest);
 
 	HTTPResponseImpl res;
 	std::istream& res_stream = client->receiveResponse(res);
@@ -59,14 +58,15 @@ HTTPRequestImpl AuthTokenFetcher::buildTokenRequest(const std::string &client_ID
 		params.insert({ std::string(JSON_SCOPE_KEY), encodeScopes(scopes) });
 	}
 
-	HTTP_request_body =
+	auto request_body =
 		encodeQueryParameters(params);
 
 	std::string path(token_endpoint.getPathAndQuery());
 	if (path.empty()) path = "/";
 	HTTPRequestImpl req(HTTPRequest::HTTP_POST, path);
 	req.setContentType("application/x-www-form-urlencoded");
-	req.setContentLength(HTTP_request_body.length());
+	req.setContentLength(request_body.length());
+	req.setBody(request_body);
 	return req;
 }
 

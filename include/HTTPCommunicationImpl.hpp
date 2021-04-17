@@ -12,11 +12,14 @@ public:
 	void setContentType(const std::string& media_type) override;
 	void setContentLength(std::streamsize length) override;
 	void set(const std::string& name, const std::string& value) override;
+	void setBody(const std::string& request_body) override;
+	std::string getBody() override;
 	Poco::Net::HTTPRequest getRequest() override;
 	virtual ~HTTPRequestImpl() {};
 
 private:
 	Poco::Net::HTTPRequest request;
+	std::string request_body_;
 };
 
 class HTTPResponseImpl : public IHTTPResponse
@@ -37,7 +40,7 @@ class HTTPClientSessionImpl : public IHTTPClientSession
 {
 public:
 	HTTPClientSessionImpl(const std::string& host) : session{ Poco::Net::HTTPClientSession{ host } } {};
-	std::ostream& sendRequest(IHTTPRequest& request) override;
+	void sendRequest(IHTTPRequest& request) override;
 	std::istream& receiveResponse(IHTTPResponse& response) override;
 	virtual ~HTTPClientSessionImpl() {};
 

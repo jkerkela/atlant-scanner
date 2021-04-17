@@ -18,7 +18,7 @@ TEST(AuthTokenFetcher, TestfetchValidResponseJSON) {
 	//PRE: mock client session, sendRequest and receiveResponse
 	auto mockHTTPClientSessionImpl = std::make_unique<MockHTTPClientSessionImpl>() ;
 	std::ostringstream buf;
-	EXPECT_CALL(*mockHTTPClientSessionImpl, sendRequest(_)).Times(1).WillOnce(ReturnRef(buf));
+	EXPECT_CALL(*mockHTTPClientSessionImpl, sendRequest(_)).Times(1);
 	std::string response_content{ "{ \"access_token\": \"Token1\", \"token_type\" : \"bearer\", \"expires_in\" : 3600 }" };
 	std::istringstream is{ response_content };
 	EXPECT_CALL(*mockHTTPClientSessionImpl, receiveResponse(_)).Times(1).WillOnce(ReturnRef(is));
@@ -37,7 +37,7 @@ TEST(AuthTokenFetcher, TestfetchInvalidResponseJSON) {
 	//PRE: mock client session, sendRequest and receiveResponse
 	auto mockHTTPClientSessionImpl = std::make_unique<MockHTTPClientSessionImpl>();
 	std::ostringstream buf;
-	EXPECT_CALL(*mockHTTPClientSessionImpl, sendRequest(_)).Times(1).WillOnce(ReturnRef(buf));
+	EXPECT_CALL(*mockHTTPClientSessionImpl, sendRequest(_));
 	std::string invalid_response_content{ "" };
 	std::istringstream is{ invalid_response_content };
 	EXPECT_CALL(*mockHTTPClientSessionImpl, receiveResponse(_)).Times(1).WillOnce(ReturnRef(is));

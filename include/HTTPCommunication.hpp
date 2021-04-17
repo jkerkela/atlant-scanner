@@ -10,8 +10,10 @@ class IHTTPRequest
 public:
 	virtual void setContentType(const std::string& media_type) = 0;
 	virtual void setContentLength(std::streamsize length) = 0;
+	virtual void setBody(const std::string& request_body) = 0;
 	virtual void set(const std::string& name, const std::string& value) = 0;
 	virtual Poco::Net::HTTPRequest getRequest() = 0;
+	virtual std::string getBody() = 0;
 	virtual ~IHTTPRequest() {};
 };
 
@@ -29,7 +31,7 @@ public:
 class IHTTPClientSession
 {
 public:
-	virtual std::ostream& sendRequest(IHTTPRequest& request) = 0;
+	virtual void sendRequest(IHTTPRequest& request) = 0;
 	virtual std::istream& receiveResponse(IHTTPResponse& response) = 0;
 	virtual ~IHTTPClientSession() {};
 

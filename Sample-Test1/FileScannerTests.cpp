@@ -42,7 +42,7 @@ protected:
 	void mock_scan_response(const std::string& scan_resp = scan_response_content) 
 	{
 		mock_client_session_for_scan = std::make_unique<MockHTTPClientSessionImpl>();
-		EXPECT_CALL(*mock_client_session_for_scan, sendRequest(_)).Times(1).WillOnce(ReturnRef(scan_response_buf));
+		EXPECT_CALL(*mock_client_session_for_scan, sendRequest(_)).Times(1);
 		scan_response_stream << scan_resp;
 		EXPECT_CALL(*mock_client_session_for_scan, receiveResponse(_)).Times(1).WillOnce(ReturnRef(scan_response_stream));
 	}
@@ -51,7 +51,7 @@ protected:
 	{
 		//PRE: Mock client session, sendRequest, receiveResponse for auth token requests
 		mock_client_session_for_auth = std::make_unique<MockHTTPClientSessionImpl>();
-		EXPECT_CALL(*mock_client_session_for_auth, sendRequest(_)).Times(1).WillOnce(ReturnRef(auth_response_buf));
+		EXPECT_CALL(*mock_client_session_for_auth, sendRequest(_)).Times(1);
 		auth_response_stream << auth_response_content;
 		EXPECT_CALL(*mock_client_session_for_auth, receiveResponse(_)).Times(1).WillOnce(ReturnRef(auth_response_stream));
 

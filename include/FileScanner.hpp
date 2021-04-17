@@ -32,7 +32,6 @@ private:
 	Poco::URI poll_endpoint;
 	Authenticator &authenticator;
 	AuthToken auth_token;
-	std::string HTTP_reques_body;
 
 	//TODO: encapsulate request building and processing to own classes 
 	HTTPRequestImpl buildScanRequest(ScanMetadata &metadata, std::ifstream &input);

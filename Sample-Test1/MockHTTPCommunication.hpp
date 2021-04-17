@@ -11,7 +11,7 @@ class MockHTTPClientSessionImpl : public IHTTPClientSession
 {
 public:
 	MockHTTPClientSessionImpl() {};
-	MOCK_METHOD1(sendRequest, std::ostream& (IHTTPRequest& request)) {};
+	MOCK_METHOD1(sendRequest, void(IHTTPRequest& request)) {};
 	MOCK_METHOD1(receiveResponse, std::istream& (IHTTPResponse& response)) {};
 
 	virtual ~MockHTTPClientSessionImpl() {};

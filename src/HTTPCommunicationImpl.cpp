@@ -15,6 +15,16 @@ void HTTPRequestImpl::set(const std::string& name, const std::string& value)
 	getRequest().set(name, value);
 }
 
+void HTTPRequestImpl::setBody(const std::string& request_body)
+{
+	request_body_ = request_body;
+}
+
+std::string HTTPRequestImpl::getBody()
+{
+	return request_body_;
+}
+
 Poco::Net::HTTPRequest HTTPRequestImpl::getRequest()
 {
 	return request;
@@ -40,10 +50,11 @@ const std::string& HTTPResponseImpl::get(const std::string& name)
 	return response.get(name);
 }
 
-std::ostream& HTTPClientSessionImpl::sendRequest(IHTTPRequest& request)
+void HTTPClientSessionImpl::sendRequest(IHTTPRequest& request)
 {
 	auto req = request.getRequest();
-	return session.sendRequest(req);
+	auto request_body = request.getBody();
+	session.sendRequest(req) << request_body;
 }
 
 std::istream& HTTPClientSessionImpl::receiveResponse(IHTTPResponse& response)

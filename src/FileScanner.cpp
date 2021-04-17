@@ -33,8 +33,7 @@ void FileScanner::refreshToken()
 ScanResult FileScanner::scan(ScanMetadata &metadata, std::ifstream& input, std::unique_ptr<IHTTPClientSession> client)
 {
 	HTTPRequestImpl scan_request = buildScanRequest(metadata, input);
-	std::ostream& req_stream = client->sendRequest(scan_request);
-	req_stream << HTTP_reques_body;
+	client->sendRequest(scan_request);
 
 	return processScanResponse(std::move(client));
 }
@@ -54,12 +53,13 @@ HTTPRequestImpl FileScanner::buildScanRequest(ScanMetadata &metadata, std::ifstr
 	std::string input_str((std::istreambuf_iterator<char>(input)),
 		std::istreambuf_iterator<char>());
 	multipart_request_builder.addPart(MultiPartRequestBuilder::Part{"data", "application/octet-stream", input_str});
-	HTTP_reques_body = multipart_request_builder.encode();
+	auto request_body = multipart_request_builder.encode();
 
 	HTTPRequestImpl req(HTTPRequest::HTTP_POST, scan_endpoint.getPathAndQuery());
 	req.setContentType("multipart/form-data; boundary=" + multipart_request_builder.getBoundary());
 	req.set("Authorization", std::string("Bearer " + auth_token.getToken()));
-	req.setContentLength(HTTP_reques_body.length());
+	req.setContentLength(request_body.length());
+	req.setBody(request_body);
 	return req;
 }
 
