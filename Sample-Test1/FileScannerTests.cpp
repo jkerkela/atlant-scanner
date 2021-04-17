@@ -22,38 +22,63 @@ TEST(FileScanner, TestConstructorWithNonAccessibleAuthAddress) {
 	EXPECT_THROW(FileScanner("some_scannig_address", authenticator), NetException);
 }
 
-//TODO: make test class for FileScanner and use it by TEST_F to avoid duplicate code, you will have problems with smart pointers on test class,
-// because smart pointer ownership is given to Authenticator and FileScanner on call(s)
+class TestFileScannerWithPreMockedAuthResponse : public ::testing::Test
+{
+protected:
 
-TEST(FileScanner, TestpollWithValidResponseJSON) {
-	//PRE: Mock client session, sendRequest, receiveResponse for auth token requests
-	auto mock_client_session_for_auth = std::make_unique<MockHTTPClientSessionImpl>();
-	std::ostringstream buf;
-	EXPECT_CALL(*mock_client_session_for_auth, sendRequest(_)).Times(1).WillOnce(ReturnRef(buf));
-	std::string response_content{ "{ \"access_token\": \"Token1\", \"token_type\" : \"bearer\", \"expires_in\" : 3600 }" };
-	std::istringstream is{ response_content };
-	EXPECT_CALL(*mock_client_session_for_auth, receiveResponse(_)).Times(1).WillOnce(ReturnRef(is));
+	FileScanner* file_scanner;
+	std::unique_ptr<MockHTTPClientSessionImpl> mock_client_session_for_auth;
+	std::unique_ptr<MockHTTPClientSessionImpl> mock_client_session_for_scan;
 
-	//PRE: Mock client session, sendRequest, receiveResponse for file scanning
-	auto mock_client_session_for_scan = std::make_unique<MockHTTPClientSessionImpl>();
-	std::ostringstream buf2;
-	EXPECT_CALL(*mock_client_session_for_scan, sendRequest(_)).Times(1).WillOnce(ReturnRef(buf2));
-	std::string poll_response_content{ "{ \"status\": \"complete\", \"scan_result\" : \"suspicious\","
-		"\"detections\" : [ { \"name\" : \"detection1\", \"category\" : \"suspicious\", \"member_name\" : \"member1\" } ] }" };
-	std::istringstream is2{ poll_response_content };
-	EXPECT_CALL(*mock_client_session_for_scan, receiveResponse(_)).Times(1).WillOnce(ReturnRef(is2));
+	std::ostringstream auth_response_buf;
+	std::stringstream auth_response_stream;
+	std::string auth_response_content{ "{ \"access_token\": \"Token1\", \"token_type\" : \"bearer\", \"expires_in\" : 3600 }" };
+	
+	std::ostringstream scan_response_buf;
+	std::stringstream scan_response_stream;
+	inline static std::string scan_response_content{ "{ \"status\": \"complete\", \"scan_result\" : \"suspicious\","
+			"\"detections\" : [ { \"name\" : \"detection1\", \"category\" : \"suspicious\", \"member_name\" : \"member1\" } ] }" };
 
-	//PRE: Create Authenticator and FileScanner objects
-	Authenticator authenticator{ std::make_unique<AuthTokenFetcher>("auth_address", std::move(mock_client_session_for_auth)),
-		"client_ID",
-		"client_secret",
-		std::set<std::string>{ "scope1" }
-	};
-	FileScanner file_scanner{ "some_scannig_address", authenticator };
+	void mock_scan_response(const std::string& scan_resp = scan_response_content) 
+	{
+		mock_client_session_for_scan = std::make_unique<MockHTTPClientSessionImpl>();
+		EXPECT_CALL(*mock_client_session_for_scan, sendRequest(_)).Times(1).WillOnce(ReturnRef(scan_response_buf));
+		scan_response_stream << scan_resp;
+		EXPECT_CALL(*mock_client_session_for_scan, receiveResponse(_)).Times(1).WillOnce(ReturnRef(scan_response_stream));
+	}
+
+	void SetUp() override
+	{
+		//PRE: Mock client session, sendRequest, receiveResponse for auth token requests
+		mock_client_session_for_auth = std::make_unique<MockHTTPClientSessionImpl>();
+		EXPECT_CALL(*mock_client_session_for_auth, sendRequest(_)).Times(1).WillOnce(ReturnRef(auth_response_buf));
+		auth_response_stream << auth_response_content;
+		EXPECT_CALL(*mock_client_session_for_auth, receiveResponse(_)).Times(1).WillOnce(ReturnRef(auth_response_stream));
+
+		//PRE: Create Authenticator and FileScanner objects
+		Authenticator authenticator{ std::make_unique<AuthTokenFetcher>("auth_address", std::move(mock_client_session_for_auth)),
+			"client_ID",
+			"client_secret",
+			std::set<std::string>{ "scope1" }
+		};
+		file_scanner = new FileScanner("some_scannig_address", authenticator);
+	}
+	
+	void TearDown() override 
+	{
+		delete file_scanner;
+	}
+
+};
+
+TEST_F(TestFileScannerWithPreMockedAuthResponse, TestpollWithValidResponseJSON) {
+
+	//PRE: mock client session, sendRequest, receiveResponse for file scanning
+	mock_scan_response();
 
 	//ACTION: Call FileScanner poll()
 	std::string file_to_scan{ "/some_path/some_file" };
-	auto poll_result = file_scanner.poll(std::move(mock_client_session_for_scan), std::string("poll_uri"));
+	auto poll_result = file_scanner->poll(std::move(mock_client_session_for_scan), std::string("poll_uri"));
 	auto detection_result = poll_result.getDetections().front();
 
 	//VERIFY: Verify that poll result is expected
@@ -67,67 +92,26 @@ TEST(FileScanner, TestpollWithValidResponseJSON) {
 	EXPECT_EQ(detection_result.getMemberName(), expected_detection.getMemberName());
 }
 
-TEST(FileScanner, TestpollWithInvalidResponseJSON) {
-	//PRE: Mock client session, sendRequest, receiveResponse for auth token requests
-	auto mock_client_session_for_auth = std::make_unique<MockHTTPClientSessionImpl>();
-	std::ostringstream buf;
-	EXPECT_CALL(*mock_client_session_for_auth, sendRequest(_)).Times(1).WillOnce(ReturnRef(buf));
-	std::string response_content{ "{ \"access_token\": \"Token1\", \"token_type\" : \"bearer\", \"expires_in\" : 3600 }" };
-	std::istringstream is{ response_content };
-	EXPECT_CALL(*mock_client_session_for_auth, receiveResponse(_)).Times(1).WillOnce(ReturnRef(is));
-
-	//PRE: Mock client session, sendRequest, receiveResponse for file scanning
-	auto mock_client_session_for_scan = std::make_unique<MockHTTPClientSessionImpl>();
-	std::ostringstream buf2;
-	EXPECT_CALL(*mock_client_session_for_scan, sendRequest(_)).Times(1).WillOnce(ReturnRef(buf2));
-	std::string invalid_poll_response_content{ "{ \"status\": \"INVALID\", \"scan_result\" : \"suspicious\","
-		"\"detections\" : [ { \"name\" : \"detection1\", \"category\" : \"suspicious\", \"member_name\" : \"member1\" } ] }" };
-	std::istringstream is2{ invalid_poll_response_content };
-	EXPECT_CALL(*mock_client_session_for_scan, receiveResponse(_)).Times(1).WillOnce(ReturnRef(is2));
-
-	//PRE: Create Authenticator and FileScanner objects
-	Authenticator authenticator{ std::make_unique<AuthTokenFetcher>("auth_address", std::move(mock_client_session_for_auth)),
-		"client_ID",
-		"client_secret",
-		std::set<std::string>{ "scope1" }
-	};
-	FileScanner file_scanner{ "some_scannig_address", authenticator };
-
-	//VERIFY: Verify that poll call throw is expected
-	std::string file_to_scan{ "/some_path/some_file" };
-	EXPECT_THROW(file_scanner.poll(std::move(mock_client_session_for_scan), std::string("poll_uri")), APIException);
-}
-
-TEST(FileScanner, TestscanWithValidResponseJSON) {
-	//PRE: mock client session, sendRequest, receiveResponse for auth token requests
-	auto mock_client_session_for_auth = std::make_unique<MockHTTPClientSessionImpl>();
-	std::ostringstream buf;
-	EXPECT_CALL(*mock_client_session_for_auth, sendRequest(_)).Times(1).WillOnce(ReturnRef(buf));
-	std::string response_content{ "{ \"access_token\": \"Token1\", \"token_type\" : \"bearer\", \"expires_in\" : 3600 }" };
-	std::istringstream is{ response_content };
-	EXPECT_CALL(*mock_client_session_for_auth, receiveResponse(_)).Times(1).WillOnce(ReturnRef(is));
+TEST_F(TestFileScannerWithPreMockedAuthResponse, TestpollWithInvalidResponseJSON) {
 
 	//PRE: mock client session, sendRequest, receiveResponse for file scanning
-	auto mock_client_session_for_scan = std::make_unique<MockHTTPClientSessionImpl>();
-	std::ostringstream buf2;
-	EXPECT_CALL(*mock_client_session_for_scan, sendRequest(_)).Times(1).WillOnce(ReturnRef(buf2));
-	std::string scan_response_content{ "{ \"status\": \"complete\", \"scan_result\" : \"suspicious\","
-		"\"detections\" : [ { \"name\" : \"detection1\", \"category\" : \"suspicious\", \"member_name\" : \"member1\" } ] }" };
-	std::istringstream is2{ scan_response_content };
-	EXPECT_CALL(*mock_client_session_for_scan, receiveResponse(_)).Times(1).WillOnce(ReturnRef(is2));
+	std::string invalid_response_content{ "{ \"status\": \"INVALID\", \"scan_result\" : \"suspicious\","
+			"\"detections\" : [ { \"name\" : \"detection1\", \"category\" : \"suspicious\", \"member_name\" : \"member1\" } ] }" };
+	mock_scan_response(invalid_response_content);
+	
+	//VERIFY: Verify that poll call throw is expected
+	std::string file_to_scan{ "/some_path/some_file" };
+	EXPECT_THROW(file_scanner->poll(std::move(mock_client_session_for_scan), std::string("poll_uri")), APIException);
+}
 
-	//PRE: create Authenticator and FileScanner objects
-	Authenticator authenticator{ std::make_unique<AuthTokenFetcher>("auth_address", std::move(mock_client_session_for_auth)),
-		"client_ID",
-		"client_secret",
-		std::set<std::string>{ "scope1" }
-	};
-	FileScanner file_scanner{ "some_scannig_address", authenticator };
+TEST_F(TestFileScannerWithPreMockedAuthResponse, TestscanWithValidResponseJSON) {
+	//PRE: mock client session, sendRequest, receiveResponse for file scanning
+	mock_scan_response();
 	ScanMetadata scan_metadata{};
 
 	//ACTION: Call FileScanner scan()
 	std::string file_to_scan{ "/some_path/some_file" };
-	auto scan_result = file_scanner.scan(scan_metadata, std::ifstream(file_to_scan), std::move(mock_client_session_for_scan));
+	auto scan_result = file_scanner->scan(scan_metadata, std::ifstream(file_to_scan), std::move(mock_client_session_for_scan));
 	auto detection_result = scan_result.getDetections().front();
 
 	//VERIFY: Verify that scan result is expected
@@ -141,34 +125,14 @@ TEST(FileScanner, TestscanWithValidResponseJSON) {
 	EXPECT_EQ(detection_result.getMemberName(), expected_detection.getMemberName());
 }
 
-TEST(FileScanner, TestscanWithInvalidResponseJSON) {
-	//PRE: Mock client session, sendRequest, receiveResponse for auth token requests
-	auto mock_client_session_for_auth = std::make_unique<MockHTTPClientSessionImpl>();
-	std::ostringstream buf;
-	EXPECT_CALL(*mock_client_session_for_auth, sendRequest(_)).Times(1).WillOnce(ReturnRef(buf));
-	std::string response_content{ "{ \"access_token\": \"Token1\", \"token_type\" : \"bearer\", \"expires_in\" : 3600 }" };
-	std::istringstream is{ response_content };
-	EXPECT_CALL(*mock_client_session_for_auth, receiveResponse(_)).Times(1).WillOnce(ReturnRef(is));
-
-	//PRE: Mock client session, sendRequest, receiveResponse for file scanning
-	auto mock_client_session_for_scan = std::make_unique<MockHTTPClientSessionImpl>();
-	std::ostringstream buf2;
-	EXPECT_CALL(*mock_client_session_for_scan, sendRequest(_)).Times(1).WillOnce(ReturnRef(buf2));
-	std::string invalid_scan_response_content{ "{ \"status\": \"INVALID\", \"scan_result\" : \"suspicious\","
-		"\"detections\" : [ { \"name\" : \"detection1\", \"category\" : \"suspicious\", \"member_name\" : \"member1\" } ] }" };
-	std::istringstream is2{ invalid_scan_response_content };
-	EXPECT_CALL(*mock_client_session_for_scan, receiveResponse(_)).Times(1).WillOnce(ReturnRef(is2));
-
-	//PRE: Create Authenticator and FileScanner objects
-	Authenticator authenticator{ std::make_unique<AuthTokenFetcher>("auth_address", std::move(mock_client_session_for_auth)),
-		"client_ID",
-		"client_secret",
-		std::set<std::string>{ "scope1" }
-	};
-	FileScanner file_scanner{ "some_scannig_address", authenticator };
+TEST_F(TestFileScannerWithPreMockedAuthResponse, TestscanWithInvalidResponseJSON) {
+	//PRE: mock client session, sendRequest, receiveResponse for file scanning
+	std::string invalid_response_content{ "{ \"status\": \"INVALID\", \"scan_result\" : \"suspicious\","
+			"\"detections\" : [ { \"name\" : \"detection1\", \"category\" : \"suspicious\", \"member_name\" : \"member1\" } ] }" };
+	mock_scan_response(invalid_response_content);
 	ScanMetadata scan_metadata{};
 
 	//VERIFY: Verify that poll call throw is expected
 	std::string file_to_scan{ "/some_path/some_file" };
-	EXPECT_THROW(file_scanner.scan(scan_metadata, std::ifstream(file_to_scan), std::move(mock_client_session_for_scan)), APIException);
+	EXPECT_THROW(file_scanner->scan(scan_metadata, std::ifstream(file_to_scan), std::move(mock_client_session_for_scan)), APIException);
 }
