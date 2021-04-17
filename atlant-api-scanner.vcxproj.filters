@@ -1465,8 +1465,8 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="external\libs\PocoFoundationd.dll" />
-    <None Include="external\libs\PocoJSONd.dll" />
-    <None Include="external\libs\PocoNetd.dll" />
+    <Library Include="external\libs\Debug\PocoFoundationd.lib" />
+    <Library Include="external\libs\Debug\PocoJSONd.lib" />
+    <Library Include="external\libs\Debug\PocoNetd.lib" />
   </ItemGroup>
 </Project>

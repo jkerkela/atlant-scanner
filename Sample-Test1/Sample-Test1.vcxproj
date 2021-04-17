@@ -60,6 +60,7 @@
   <ItemGroup>
     <ProjectReference Include="..\atlant-api-scanner.vcxproj">
       <Project>{74c9c47c-d389-4178-91eb-ad4dd08e7a85}</Project>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -101,8 +102,8 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>C:\Users\jonik\source\repos\atlant-api-scanner\external\libs;C:\Users\jonik\source\repos\POCO\poco\cmake-build\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>PocoFoundationd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\jonik\source\repos\atlant-api-scanner\external\libs\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>PocoFoundationd.lib;PocoJSONd.lib;PocoNetd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

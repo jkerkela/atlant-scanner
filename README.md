@@ -5,9 +5,9 @@ C++ example implementation for F-Secure Atlant API file scanning (https://help.f
 
 ## Integration
 Project is build as VS solution. Project uses C++ 17.
-NOTE: Implementation is not tested with live server (see: Things to do).
-NOTE: The libary linking is not complete, all dependency libraries needs to be precompiled to, added to and used from external/libs (see: Things to do). 
-Currently linking problem is circumnvented by adding requried libs manually to output folder.
+- NOTE: Implementation is not tested with live server (see: Things to do).
+- NOTE: The libary linking is not complete, all dependency libraries needs to be used from external/libs (see: Things to do). 
+Currently linking problem is circumnvented by adding requried libs (PocoJSONd.dll, PocoNetd.dll, PocoFoundationd.dll) manually to output folder.
 
 3rd party dependencies:
   - POCO
