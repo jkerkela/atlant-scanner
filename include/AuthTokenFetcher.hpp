@@ -32,9 +32,7 @@ private:
 	HTTPRequestImpl buildTokenRequest(const std::string &client_ID, const std::string &client_secret, const std::set<std::string> &scopes);
 	std::string encodeScopes(const std::set<std::string>& scopes);
 	std::string encodeQueryParameters(const std::unordered_map<std::string, std::string> &params);
-	ScanResult deserializeScanResponse(std::istream& response);
 	AuthToken deserializeTokenResponse(std::istream& response);
-	Detection buildDetection(const std::string& detection_item_json);
 };
 
 #endif // AUTHTOKENFETCHER_HPP

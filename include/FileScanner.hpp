@@ -13,8 +13,6 @@
 
 #include <Poco/URI.h>
 
-using namespace Poco::Net;
-
 class FileScanner {
 
 public:
@@ -32,7 +30,6 @@ private:
 	Authenticator &authenticator;
 	AuthToken auth_token;
 
-	//TODO: encapsulate request building and processing to own classes 
 	HTTPRequestImpl buildScanRequest(ScanMetadata &metadata, std::ifstream &input);
 	HTTPRequestImpl buildPollRequest(const std::string& poll_URL);
 	std::string serializeScanMetadata(ScanMetadata &metadata);

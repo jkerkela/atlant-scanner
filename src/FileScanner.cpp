@@ -1,7 +1,6 @@
 
 #include "FileScanner.hpp"
 
-
 #include "APIException.hpp"
 #include "MultipartRequestBuilder.hpp"
 #include "JSONHandlerImpl.hpp"
@@ -9,8 +8,6 @@
 #include <fstream>
 #include <streambuf>
 #include <exception>
-
-using Poco::Net::HTTPResponse;
 
 namespace {
 	constexpr auto API_SCAN_POSTFIX = "/api/scan/v1";
