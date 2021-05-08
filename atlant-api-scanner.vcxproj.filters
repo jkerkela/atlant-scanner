@@ -45,6 +45,9 @@
     <ClCompile Include="src\ScanSettings.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\JSONHandlerImpl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Authenticator.hpp">
@@ -1461,6 +1464,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="external\includes\POCO\Net\include\Poco\Net\WebSocketImpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\JSONHandlerImpl.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\JSONHandler.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

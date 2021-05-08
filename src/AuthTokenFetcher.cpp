@@ -3,6 +3,7 @@
 
 #include "APIException.hpp"
 #include "Detection.hpp"
+#include "JSONHandlerImpl.hpp"
 
 #include <stdexcept>
 #include <unordered_map>
@@ -104,17 +105,16 @@ std::string AuthTokenFetcher::encodeQueryParameters(const std::unordered_map<std
 
 AuthToken AuthTokenFetcher::deserializeTokenResponse(std::istream& response)
 {
-	Poco::JSON::Parser parser;
-	auto result = parser.parse(response);
-	auto object = result.extract<Poco::JSON::Object::Ptr>();
-	auto token = object->getValue<std::string>("access_token");
-	auto expires_in = object->getValue<int>("expires_in");
+	JSONHandlerImpl handler{ response };
+	auto token = handler.getStringValue("access_token");
+	auto expires_in = handler.getIntValue("expires_in");
 	return AuthToken(token, expires_in);
 }
 
-Detection AuthTokenFetcher::buildDetection(Poco::JSON::Array::ConstIterator it) {
-	auto object = it->extract<Poco::JSON::Object::Ptr>();
-	auto detection_category = object->getValue<std::string>("category");
+Detection AuthTokenFetcher::buildDetection(const std::string& detection_item_json)
+{
+	JSONHandlerImpl detection_json{ detection_item_json };
+	auto detection_category = detection_json.getStringValue("category");
 	Detection::Category category;
 
 	if (detection_category == "suspicious") {
@@ -133,18 +133,15 @@ Detection AuthTokenFetcher::buildDetection(Poco::JSON::Array::ConstIterator it) 
 		throw APIException("Invalid detection category");
 	}
 
-	auto name = object->getValue<std::string>("name");
-	auto member = object->getValue<std::string>("member_name");
+	auto name = detection_json.getStringValue("name");
+	auto member = detection_json.getStringValue("member_name");
 	return Detection(category, name, member);
 }
 
 ScanResult AuthTokenFetcher::deserializeScanResponse(std::istream& response) 
 {
-
-	Poco::JSON::Parser parser;
-	auto result = parser.parse(response);
-	auto object = result.extract<Poco::JSON::Object::Ptr>();
-	auto scan_status = object->getValue<std::string>("status");
+	JSONHandlerImpl handler{ response };
+	auto scan_status = handler.getStringValue("status");
 	ScanResult::Status status;
 	if (scan_status == "complete") {
 		status = ScanResult::Status::COMPLETE;
@@ -156,7 +153,7 @@ ScanResult AuthTokenFetcher::deserializeScanResponse(std::istream& response)
 		throw APIException("Invalid scan status");
 	}
 
-	auto scan_res = object->getValue<std::string>("scan_result");
+	auto scan_res = handler.getStringValue("scan_result");
 	ScanResult::Result scan_result;
 	if (scan_res == "clean") {
 		scan_result = ScanResult::Result::CLEAN;
@@ -181,12 +178,10 @@ ScanResult AuthTokenFetcher::deserializeScanResponse(std::istream& response)
 	}
 
 	std::list<Detection> detections{};
-	auto array = object->getArray("detections");
-	for (Poco::JSON::Array::ConstIterator it = array->begin(); it != array->end(); ++it)
-	{
-		auto detection = buildDetection(it);
+	auto detections_array = handler.getArray("detections");
+	for (auto const detection_item : detections_array) {
+		auto detection = buildDetection(detection_item);
 		detections.emplace_back(detection);
-
 	}
 
 	return ScanResult(status, scan_result, detections);

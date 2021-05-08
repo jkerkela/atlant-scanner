@@ -36,7 +36,7 @@ protected:
 	
 	std::ostringstream scan_response_buf;
 	std::stringstream scan_response_stream;
-	inline static std::string scan_response_content{ "{ \"status\": \"complete\", \"scan_result\" : \"suspicious\","
+	inline static std::string scan_response_content{"{ \"status\": \"complete\", \"scan_result\" : \"suspicious\","
 			"\"detections\" : [ { \"name\" : \"detection1\", \"category\" : \"suspicious\", \"member_name\" : \"member1\" } ] }" };
 
 	void mock_scan_response(const std::string& scan_resp = scan_response_content) 

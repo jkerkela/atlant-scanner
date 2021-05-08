@@ -12,7 +12,6 @@
 #include <memory>
 
 #include <Poco/URI.h>
-#include <Poco/JSON/Parser.h>
 
 using namespace Poco::Net;
 
@@ -35,7 +34,7 @@ private:
 	std::string encodeQueryParameters(const std::unordered_map<std::string, std::string> &params);
 	ScanResult deserializeScanResponse(std::istream& response);
 	AuthToken deserializeTokenResponse(std::istream& response);
-	Detection buildDetection(Poco::JSON::Array::ConstIterator it);
+	Detection buildDetection(const std::string& detection_item_json);
 };
 
 #endif // AUTHTOKENFETCHER_HPP

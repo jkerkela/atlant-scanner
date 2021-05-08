@@ -4,6 +4,7 @@
 
 #include "APIException.hpp"
 #include "MultipartRequestBuilder.hpp"
+#include "JSONHandlerImpl.hpp"
 
 #include <fstream>
 #include <streambuf>
@@ -146,10 +147,10 @@ ScanResult FileScanner::processPollResponse(std::unique_ptr<IHTTPClientSession> 
 	return scan_result;
 }
 
-Detection FileScanner::buildDetection(Poco::JSON::Array::ConstIterator it) 
+Detection FileScanner::buildDetection(const std::string& detection_item_json)
 {
-	auto object = it->extract<Poco::JSON::Object::Ptr>();
-	auto detection_category = object->getValue<std::string>("category");
+	JSONHandlerImpl detection_json{ detection_item_json };
+	auto detection_category = detection_json.getStringValue("category");
 	Detection::Category category;
 
 	if (detection_category == "suspicious") {
@@ -168,18 +169,16 @@ Detection FileScanner::buildDetection(Poco::JSON::Array::ConstIterator it)
 		throw APIException("Invalid detection category");
 	}
 
-	auto name = object->getValue<std::string>("name");
-	auto member = object->getValue<std::string>("member_name");
+	auto name = detection_json.getStringValue("name");
+	auto member = detection_json.getStringValue("member_name");
 	return Detection(category, name, member);
 }
 
 ScanResult FileScanner::deserializeScanResponse(std::istream& response)
 {
-	Poco::JSON::Parser parser;
-	auto result = parser.parse(response);
-	auto object = result.extract<Poco::JSON::Object::Ptr>();
+	JSONHandlerImpl top_level_handler{ response };
+	auto scan_status = top_level_handler.getStringValue("status");
 
-	auto scan_status = object->getValue<std::string>("status");
 	ScanResult::Status status;
 	if (scan_status == "complete") {
 		status = ScanResult::Status::COMPLETE;
@@ -191,7 +190,7 @@ ScanResult FileScanner::deserializeScanResponse(std::istream& response)
 		throw APIException("Invalid scan status");
 	}
 
-	auto scan_res = object->getValue<std::string>("scan_result");
+	auto scan_res = top_level_handler.getStringValue("scan_result");
 	ScanResult::Result scan_result;
 	if (scan_res == "clean") {
 		scan_result = ScanResult::Result::CLEAN;
@@ -216,10 +215,9 @@ ScanResult FileScanner::deserializeScanResponse(std::istream& response)
 	}
 
 	std::list<Detection> detections{};
-	auto array = object->getArray("detections");
-	for (Poco::JSON::Array::ConstIterator it = array->begin(); it != array->end(); ++it)
-	{
-		auto detection = buildDetection(it);
+	auto detections_array = top_level_handler.getArray("detections");
+	for (auto const detection_item : detections_array) {
+		auto detection = buildDetection(detection_item);
 		detections.emplace_back(detection);
 	}
 

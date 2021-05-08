@@ -11,7 +11,6 @@
 #include <fstream>
 #include <optional>
 
-#include <Poco/JSON/Parser.h>
 #include <Poco/URI.h>
 
 using namespace Poco::Net;
@@ -40,6 +39,6 @@ private:
 	ScanResult processScanResponse(std::unique_ptr<IHTTPClientSession> client);
 	ScanResult processPollResponse(std::unique_ptr<IHTTPClientSession> client);
 	ScanResult deserializeScanResponse(std::istream &response);
-	Detection buildDetection(Poco::JSON::Array::ConstIterator it);
+	Detection buildDetection(const std::string& detection_item_json);
 };
 #endif // FILESCANNER_HPP
