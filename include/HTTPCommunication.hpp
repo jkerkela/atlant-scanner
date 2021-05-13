@@ -32,7 +32,10 @@ class IHTTPClientSession
 {
 public:
 	virtual void sendRequest(IHTTPRequest& request) = 0;
-	virtual std::istream& receiveResponse(IHTTPResponse& response) = 0;
+	virtual std::istream& receiveResponse() = 0;
+	virtual Poco::Net::HTTPResponse::HTTPStatus getResponseStatus() = 0;
+	virtual bool responseContains(const std::string& value) = 0;
+	virtual std::string getFromResponse(const std::string& value) = 0;
 	virtual ~IHTTPClientSession() {};
 
 };

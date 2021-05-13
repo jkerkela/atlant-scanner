@@ -37,8 +37,7 @@ AuthToken AuthTokenFetcher::fetch(
 	HTTPRequestImpl tokenRequest = buildTokenRequest(client_ID, client_secret, scopes);
 	client->sendRequest(tokenRequest);
 
-	HTTPResponseImpl res;
-	std::istream& res_stream = client->receiveResponse(res);
+	std::istream& res_stream = client->receiveResponse();
 	try {
 		return deserializeTokenResponse(res_stream);
 	}

@@ -15,14 +15,14 @@ ScanResult ScanPoller::scan(ScanMetadata &metadata, std::string &path)
 ScanResult ScanPoller::getResultByPoll(const std::optional<int> &retry_after, const std::optional<std::string> &poll_URL)
 {
 	std::this_thread::sleep_for(std::chrono::seconds(retry_after.value()));
-	return file_scanner.poll(std::make_unique<HTTPClientSessionImpl>(file_scanner.getAddress().getHost()), poll_URL.value());
+	return file_scanner.poll(std::make_unique<HTTPClientSessionImpl>(file_scanner.getAddress().getHost(), std::make_unique<HTTPResponseImpl>()), poll_URL.value());
 }
 
 ScanResult ScanPoller::scan(ScanMetadata &metadata, std::ifstream file_stream)
 {
 	ScanResult result = file_scanner.scan(metadata, 
 		file_stream,
-		std::make_unique<HTTPClientSessionImpl>(file_scanner.getAddress().getHost())
+		std::make_unique<HTTPClientSessionImpl>(file_scanner.getAddress().getHost(), std::make_unique<HTTPResponseImpl>())
 	);
 	auto status = result.getStatus();
 	switch (status) {

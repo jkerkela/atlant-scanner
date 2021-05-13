@@ -39,13 +39,20 @@ private:
 class HTTPClientSessionImpl : public IHTTPClientSession
 {
 public:
-	HTTPClientSessionImpl(const std::string& host) : session{ Poco::Net::HTTPClientSession{ host } } {};
+	HTTPClientSessionImpl(const std::string& host, std::unique_ptr<IHTTPResponse> http_response) :
+		session{ Poco::Net::HTTPClientSession{ host } },
+		http_response_ { std::move(http_response )}
+		{};
 	void sendRequest(IHTTPRequest& request) override;
-	std::istream& receiveResponse(IHTTPResponse& response) override;
+	Poco::Net::HTTPResponse::HTTPStatus getResponseStatus() override;
+	std::istream& receiveResponse() override;
+	bool responseContains(const std::string& value) override;
+	std::string getFromResponse(const std::string& value) override;
 	virtual ~HTTPClientSessionImpl() {};
 
 protected:
 	Poco::Net::HTTPClientSession session;
+	std::unique_ptr<IHTTPResponse> http_response_;
 };
 
 #endif // HTTPCOMMUNICATIONIMPL_HPP

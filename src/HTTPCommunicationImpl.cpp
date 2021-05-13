@@ -57,8 +57,24 @@ void HTTPClientSessionImpl::sendRequest(IHTTPRequest& request)
 	session.sendRequest(req) << request_body;
 }
 
-std::istream& HTTPClientSessionImpl::receiveResponse(IHTTPResponse& response)
+Poco::Net::HTTPResponse::HTTPStatus HTTPClientSessionImpl::getResponseStatus()
 {
-	auto res = response.getResponse();
+	return http_response_->getStatus();
+}
+
+std::istream& HTTPClientSessionImpl::receiveResponse()
+{
+	auto res = http_response_->getResponse();
 	return session.receiveResponse(res);
 }
+
+bool HTTPClientSessionImpl::responseContains(const std::string& value)
+{
+	return http_response_->has(value);
+}
+
+std::string HTTPClientSessionImpl::getFromResponse(const std::string& value)
+{
+	return http_response_->get(value);
+}
+

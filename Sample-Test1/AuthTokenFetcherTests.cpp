@@ -11,7 +11,10 @@ using ::testing::Return;
 using ::testing::ReturnRef;
 
 TEST(AuthTokenFetcher, TestConstructor) {
-	AuthTokenFetcher auth_token_fetcher{ std::string("authorization_address"), std::make_unique<HTTPClientSessionImpl>(std::string("host"))};
+	AuthTokenFetcher auth_token_fetcher{ 
+		std::string("authorization_address"), 
+		std::make_unique<HTTPClientSessionImpl>(std::string("host"), std::make_unique<HTTPResponseImpl>())
+	};
 }
 
 TEST(AuthTokenFetcher, TestfetchValidResponseJSON) {
@@ -21,7 +24,7 @@ TEST(AuthTokenFetcher, TestfetchValidResponseJSON) {
 	EXPECT_CALL(*mockHTTPClientSessionImpl, sendRequest(_)).Times(1);
 	std::string response_content{ "{ \"access_token\": \"Token1\", \"token_type\" : \"bearer\", \"expires_in\" : 3600 }" };
 	std::istringstream is{ response_content };
-	EXPECT_CALL(*mockHTTPClientSessionImpl, receiveResponse(_)).Times(1).WillOnce(ReturnRef(is));
+	EXPECT_CALL(*mockHTTPClientSessionImpl, receiveResponse()).Times(1).WillOnce(ReturnRef(is));
 	
 	//ACTION: create AuthTokenFetcher and call fetch()
 	AuthTokenFetcher auth_token_fetcher(std::string{ "auth_address" }, std::move(mockHTTPClientSessionImpl));
@@ -40,7 +43,7 @@ TEST(AuthTokenFetcher, TestfetchInvalidResponseJSON) {
 	EXPECT_CALL(*mockHTTPClientSessionImpl, sendRequest(_));
 	std::string invalid_response_content{ "" };
 	std::istringstream is{ invalid_response_content };
-	EXPECT_CALL(*mockHTTPClientSessionImpl, receiveResponse(_)).Times(1).WillOnce(ReturnRef(is));
+	EXPECT_CALL(*mockHTTPClientSessionImpl, receiveResponse()).Times(1).WillOnce(ReturnRef(is));
 
 	//ACTION: create AuthTokenFetcher
 	AuthTokenFetcher auth_token_fetcher(std::string{ "auth_address" }, std::move(mockHTTPClientSessionImpl));

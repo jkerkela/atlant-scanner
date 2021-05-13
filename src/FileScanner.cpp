@@ -71,9 +71,8 @@ HTTPRequestImpl FileScanner::buildPollRequest(const std::string &poll_URL)
 ScanResult FileScanner::processScanResponse(std::unique_ptr<IHTTPClientSession> client)
 {
 	ScanResult scan_result{};
-	HTTPResponseImpl res;
-	std::istream& res_stream = client->receiveResponse(res);
-	auto status_code = res.getStatus();
+	std::istream& res_stream = client->receiveResponse();
+	auto status_code = client->getResponseStatus();
 	if ((status_code == HTTPResponse::HTTPStatus::HTTP_OK) || (status_code == HTTPResponse::HTTPStatus::HTTP_PROCESSING)) {
 		try {
 			scan_result = deserializeScanResponse(res_stream);
@@ -87,18 +86,18 @@ ScanResult FileScanner::processScanResponse(std::unique_ptr<IHTTPClientSession> 
 	}
 
 	if (status_code == HTTPResponse::HTTPStatus::HTTP_PROCESSING) {
-		if (!res.has("Location")) {
+		if(!client->responseContains("Location")) {
 			throw APIException("Missing poll URL");
 		}
-		auto location = res.get("Location");
+		auto location = client->getFromResponse("Location");
 
 		scan_result.setPollURL(location);
 
-		if (!res.has("Retry-After")) {
+		if (!client->responseContains("Retry-After")) {
 			throw APIException("Missing retry after duration");
 		}
 
-		auto retry = res.get("Retry-After");
+		auto retry = client->getFromResponse("Retry-After");
 		try {
 			scan_result.setRetryAfter(std::stoi(retry));
 		}
@@ -112,9 +111,8 @@ ScanResult FileScanner::processScanResponse(std::unique_ptr<IHTTPClientSession> 
 
 ScanResult FileScanner::processPollResponse(std::unique_ptr<IHTTPClientSession> client) {
 	ScanResult scan_result{};
-	HTTPResponseImpl res;
-	std::istream& res_stream = client->receiveResponse(res);
-	auto status_code = res.getStatus();
+	std::istream& res_stream = client->receiveResponse();
+	auto status_code = client->getResponseStatus();
 
 	if (status_code == HTTPResponse::HTTPStatus::HTTP_OK) {
 		try {
@@ -130,10 +128,10 @@ ScanResult FileScanner::processPollResponse(std::unique_ptr<IHTTPClientSession> 
 
 	if (scan_result.getStatus() == ScanResult::Status::PENDING) {
 
-		if (!res.has("Retry-After")) {
+		if (!client->responseContains("Retry-After")) {
 			throw APIException("Missing retry after duration");
 		}
-		auto retry = res.get("Retry-After");
+		auto retry = client->getFromResponse("Retry-After");
 		try {
 			scan_result.setRetryAfter(std::stoi(retry));
 		}

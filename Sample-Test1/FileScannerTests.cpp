@@ -14,7 +14,8 @@ using ::testing::Return;
 using ::testing::ReturnRef;
 
 TEST(FileScanner, TestConstructorWithNonAccessibleAuthAddress) {
-	Authenticator authenticator{ std::make_unique<AuthTokenFetcher>("auth_address", std::make_unique<HTTPClientSessionImpl>("auth_address")), 
+	Authenticator authenticator{ 
+		std::make_unique<AuthTokenFetcher>("auth_address", std::make_unique<HTTPClientSessionImpl>("auth_address", std::make_unique<HTTPResponseImpl>())), 
 		"client_ID", 
 		"client_secret", 
 		std::set<std::string>{ "scope1" }
@@ -29,6 +30,7 @@ protected:
 	FileScanner* file_scanner;
 	std::unique_ptr<MockHTTPClientSessionImpl> mock_client_session_for_auth;
 	std::unique_ptr<MockHTTPClientSessionImpl> mock_client_session_for_scan;
+	std::unique_ptr<HTTPResponseImpl> mock_http_response;
 
 	std::ostringstream auth_response_buf;
 	std::stringstream auth_response_stream;
@@ -39,12 +41,23 @@ protected:
 	inline static std::string scan_response_content{"{ \"status\": \"complete\", \"scan_result\" : \"suspicious\","
 			"\"detections\" : [ { \"name\" : \"detection1\", \"category\" : \"suspicious\", \"member_name\" : \"member1\" } ] }" };
 
-	void mock_scan_response(const std::string& scan_resp = scan_response_content) 
+	void mock_scan_response(const std::string& scan_resp = scan_response_content)
 	{
 		mock_client_session_for_scan = std::make_unique<MockHTTPClientSessionImpl>();
 		EXPECT_CALL(*mock_client_session_for_scan, sendRequest(_)).Times(1);
 		scan_response_stream << scan_resp;
-		EXPECT_CALL(*mock_client_session_for_scan, receiveResponse(_)).Times(1).WillOnce(ReturnRef(scan_response_stream));
+		EXPECT_CALL(*mock_client_session_for_scan, receiveResponse()).Times(1).WillOnce(ReturnRef(scan_response_stream));
+		EXPECT_CALL(*mock_client_session_for_scan, getResponseStatus()).Times(1).WillOnce(Return(HTTPResponse::HTTPStatus::HTTP_OK));
+	}
+
+	void mock_scan_response_with_HTTP_Status(const HTTPResponse::HTTPStatus http_status)
+	{
+		mock_client_session_for_scan = std::make_unique<MockHTTPClientSessionImpl>();
+		EXPECT_CALL(*mock_client_session_for_scan, sendRequest(_)).Times(1);
+		mock_http_response = std::make_unique<HTTPResponseImpl>();
+		scan_response_stream << "";
+		EXPECT_CALL(*mock_client_session_for_scan, receiveResponse()).Times(1).WillOnce(ReturnRef(scan_response_stream));
+		EXPECT_CALL(*mock_client_session_for_scan, getResponseStatus()).Times(1).WillOnce(Return(http_status));
 	}
 
 	void SetUp() override
@@ -53,7 +66,7 @@ protected:
 		mock_client_session_for_auth = std::make_unique<MockHTTPClientSessionImpl>();
 		EXPECT_CALL(*mock_client_session_for_auth, sendRequest(_)).Times(1);
 		auth_response_stream << auth_response_content;
-		EXPECT_CALL(*mock_client_session_for_auth, receiveResponse(_)).Times(1).WillOnce(ReturnRef(auth_response_stream));
+		EXPECT_CALL(*mock_client_session_for_auth, receiveResponse()).Times(1).WillOnce(ReturnRef(auth_response_stream));
 
 		//PRE: Create Authenticator and FileScanner objects
 		Authenticator authenticator{ std::make_unique<AuthTokenFetcher>("auth_address", std::move(mock_client_session_for_auth)),
@@ -100,10 +113,18 @@ TEST_F(TestFileScannerWithPreMockedAuthResponse, TestpollWithInvalidResponseJSON
 	mock_scan_response(invalid_response_content);
 	
 	//VERIFY: Verify that poll call throw is expected
-	std::string file_to_scan{ "/some_path/some_file" };
+	EXPECT_THROW(file_scanner->poll(std::move(mock_client_session_for_scan), std::string("poll_uri")), APIException);
+}
+TEST_F(TestFileScannerWithPreMockedAuthResponse, TestpollWithOtherThanHTTP_OKPollResponse) {
+
+	//PRE: mock client session, sendRequest, receiveResponse for file scanning
+	mock_scan_response_with_HTTP_Status(HTTPResponse::HTTPStatus::HTTP_FORBIDDEN);
+
+	//VERIFY: Verify that poll call throw is expected
 	EXPECT_THROW(file_scanner->poll(std::move(mock_client_session_for_scan), std::string("poll_uri")), APIException);
 }
 
+//TODO: Implement tests for HTTP_PROCESSING, HTTP_PENDING
 TEST_F(TestFileScannerWithPreMockedAuthResponse, TestscanWithValidResponseJSON) {
 	//PRE: mock client session, sendRequest, receiveResponse for file scanning
 	mock_scan_response();
