@@ -39,9 +39,9 @@ private:
 class HTTPClientSessionImpl : public IHTTPClientSession
 {
 public:
-	HTTPClientSessionImpl(const std::string& host, std::unique_ptr<IHTTPResponse> http_response) :
+	HTTPClientSessionImpl(const std::string& host, std::unique_ptr<IHTTPResponse> http_response_impl) :
 		session{ Poco::Net::HTTPClientSession{ host } },
-		http_response_ { std::move(http_response )}
+		http_response_ { std::move(http_response_impl)}
 		{};
 	void sendRequest(IHTTPRequest& request) override;
 	Poco::Net::HTTPResponse::HTTPStatus getResponseStatus() override;

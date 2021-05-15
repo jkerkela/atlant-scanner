@@ -133,7 +133,8 @@ ScanResult FileScanner::processPollResponse(std::unique_ptr<IHTTPClientSession> 
 		}
 		auto retry = client->getFromResponse("Retry-After");
 		try {
-			scan_result.setRetryAfter(std::stoi(retry));
+			scan_result.setRetryAfter(std::stoi(retry)); //Retry after is value in seconds based on documentation:
+			// https://help.f-secure.com/product.html#business/atlant/latest/en/concept_C10CD401FFA94772AF3D88E0D2DC6710-latest-en
 		}
 		catch (const std::invalid_argument& e) {
 			throw APIException("Invalid retry after duration: " + std::string(e.what()));
