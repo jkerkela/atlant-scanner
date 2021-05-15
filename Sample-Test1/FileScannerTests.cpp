@@ -94,7 +94,6 @@ TEST_F(TestFileScannerWithMockedAuthResponse, TestpollWithValidResponseJSON) {
 	mock_scan_HTTP_response();
 
 	//ACTION: Call FileScanner poll()
-	std::string file_to_scan{ "/some_path/some_file" };
 	auto poll_result = file_scanner->poll(std::move(mock_client_session_for_scan), std::string("poll_uri"));
 	auto detection_result = poll_result.getDetections().front();
 
@@ -155,14 +154,23 @@ TEST_F(TestFileScannerWithMockedAuthResponse, TestpollWithScanStatusPendingMissi
 	EXPECT_THROW(file_scanner->poll(std::move(mock_client_session_for_scan), std::string("poll_uri")), APIException);
 }
 
-//TODO: Implement tests for scan HTTP_PROCESSING
+TEST_F(TestFileScannerWithMockedAuthResponse, TestpollWithScanStatusPendingInvalidRetryAfter) {
+
+	//PRE: mock client session, sendRequest, receiveResponse for file scanning
+	std::string pending_response_content{ "{ \"status\": \"pending\", \"scan_result\" : \"clean\"}" };
+	mock_scan_HTTP_response(HTTPResponse::HTTPStatus::HTTP_OK, pending_response_content, "invalid");
+
+	//VERIFY: Verify that poll call throw is expected
+	EXPECT_THROW(file_scanner->poll(std::move(mock_client_session_for_scan), std::string("poll_uri")), APIException);
+}
+
 TEST_F(TestFileScannerWithMockedAuthResponse, TestscanWithValidResponseJSON) {
 	//PRE: mock client session, sendRequest, receiveResponse for file scanning
 	mock_scan_HTTP_response();
 	ScanMetadata scan_metadata{};
+	std::string file_to_scan{ "/some_path/some_file" };
 
 	//ACTION: Call FileScanner scan()
-	std::string file_to_scan{ "/some_path/some_file" };
 	auto scan_result = file_scanner->scan(scan_metadata, std::ifstream(file_to_scan), std::move(mock_client_session_for_scan));
 	auto detection_result = scan_result.getDetections().front();
 
@@ -183,8 +191,60 @@ TEST_F(TestFileScannerWithMockedAuthResponse, TestscanWithInvalidResponseJSON) {
 			"\"detections\" : [ { \"name\" : \"detection1\", \"category\" : \"suspicious\", \"member_name\" : \"member1\" } ] }" };
 	mock_scan_HTTP_response(HTTPResponse::HTTPStatus::HTTP_OK, invalid_response_content);
 	ScanMetadata scan_metadata{};
+	std::string file_to_scan{ "/some_path/some_file" };
+
+	//VERIFY: Verify that poll call throw is expected
+	EXPECT_THROW(file_scanner->scan(scan_metadata, std::ifstream(file_to_scan), std::move(mock_client_session_for_scan)), APIException);
+}
+
+TEST_F(TestFileScannerWithMockedAuthResponse, TestscanWithHTTP_PROCESSINGResponse) {
+	//PRE: mock client session, sendRequest, receiveResponse for file scanning
+	std::string pending_response_content{ "{ \"status\": \"pending\", \"scan_result\" : \"clean\"}" };
+	mock_scan_HTTP_response(HTTPResponse::HTTPStatus::HTTP_PROCESSING, pending_response_content, "100", "poll_uri");
+	ScanMetadata scan_metadata{};
 
 	//VERIFY: Verify that poll call throw is expected
 	std::string file_to_scan{ "/some_path/some_file" };
+	auto scan_result = file_scanner->scan(scan_metadata, std::ifstream(file_to_scan), std::move(mock_client_session_for_scan));
+	
+	//VERIFY: Verify that poll result is expected
+	ScanResult expected_scan_result{ ScanResult::Status::PENDING, ScanResult::Result::CLEAN, std::list<Detection>{},  100, "poll_uri" };
+
+	EXPECT_EQ(scan_result.getRetryAfter(), expected_scan_result.getRetryAfter());
+	EXPECT_EQ(scan_result.getPollURL(), expected_scan_result.getPollURL());
+}
+
+TEST_F(TestFileScannerWithMockedAuthResponse, TestscanWithHTTP_PROCESSINGResponseMissingRetryAfter) {
+	//PRE: mock client session, sendRequest, receiveResponse for file scanning
+	std::string pending_response_content{ "{ \"status\": \"pending\", \"scan_result\" : \"clean\"}" };
+	mock_scan_HTTP_response(HTTPResponse::HTTPStatus::HTTP_PROCESSING, pending_response_content, "", "poll_uri");
+	EXPECT_CALL(*mock_client_session_for_scan, responseContains(StrEq("Retry-After"))).Times(1).WillOnce(Return(false));
+	ScanMetadata scan_metadata{};
+	std::string file_to_scan{ "/some_path/some_file" };
+
+	//VERIFY: Verify that poll call throw is expected
+	EXPECT_THROW(file_scanner->scan(scan_metadata, std::ifstream(file_to_scan), std::move(mock_client_session_for_scan)), APIException);
+}
+TEST_F(TestFileScannerWithMockedAuthResponse, TestscanWithHTTP_PROCESSINGResponseMissingLocation) {
+	//PRE: mock client session, sendRequest, receiveResponse for file scanning
+	std::string pending_response_content{ "{ \"status\": \"pending\", \"scan_result\" : \"clean\"}" };
+	mock_scan_HTTP_response(HTTPResponse::HTTPStatus::HTTP_PROCESSING, pending_response_content);
+	EXPECT_CALL(*mock_client_session_for_scan, responseContains(StrEq("Location"))).Times(1).WillOnce(Return(false));
+	ScanMetadata scan_metadata{};
+	std::string file_to_scan{ "/some_path/some_file" };
+
+	//VERIFY: Verify that poll call throw is expected
+	EXPECT_THROW(file_scanner->scan(scan_metadata, std::ifstream(file_to_scan), std::move(mock_client_session_for_scan)), APIException);
+}
+
+TEST_F(TestFileScannerWithMockedAuthResponse, TestscanWithHTTP_PROCESSINGResponseInvalidRetryAfter) {
+
+	//PRE: mock client session, sendRequest, receiveResponse for file scanning
+	std::string pending_response_content{ "{ \"status\": \"pending\", \"scan_result\" : \"clean\"}" };
+	mock_scan_HTTP_response(HTTPResponse::HTTPStatus::HTTP_PROCESSING, pending_response_content, "invalid", "poll_uri");
+	ScanMetadata scan_metadata{};
+	std::string file_to_scan{ "/some_path/some_file" };
+
+	//VERIFY: Verify that poll call throw is expected
 	EXPECT_THROW(file_scanner->scan(scan_metadata, std::ifstream(file_to_scan), std::move(mock_client_session_for_scan)), APIException);
 }
