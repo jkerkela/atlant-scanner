@@ -13,6 +13,11 @@
 
 #include <Poco/URI.h>
 
+namespace filescanner {
+	constexpr auto API_SCAN_POSTFIX = "/api/scan/v1";
+	constexpr auto API_POLL_POSTFIX = "/api/poll/v1";
+}
+
 class FileScanner {
 
 public:

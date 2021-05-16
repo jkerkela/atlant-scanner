@@ -13,7 +13,7 @@ using ::testing::ReturnRef;
 TEST(AuthTokenFetcher, TestConstructor) {
 	AuthTokenFetcher auth_token_fetcher{ 
 		std::string("authorization_address"), 
-		std::make_unique<HTTPClientSessionImpl>(std::string("host"), std::make_unique<HTTPResponseImpl>())
+		std::make_unique<HTTPClientSessionImpl>(std::string("host"))
 	};
 }
 

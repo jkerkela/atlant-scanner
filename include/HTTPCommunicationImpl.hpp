@@ -10,7 +10,7 @@ class HTTPRequestImpl : public IHTTPRequest
 public:
 	HTTPRequestImpl(const std::string& method, const std::string& uri) : request{ Poco::Net::HTTPRequest{ method, uri } } {};
 	void setContentType(const std::string& media_type) override;
-	void setContentLength(std::streamsize length) override;
+	void setContentLength(const std::streamsize& length) override;
 	void set(const std::string& name, const std::string& value) override;
 	void setBody(const std::string& request_body) override;
 	std::string getBody() override;
@@ -39,7 +39,9 @@ private:
 class HTTPClientSessionImpl : public IHTTPClientSession
 {
 public:
-	HTTPClientSessionImpl(const std::string& host, std::unique_ptr<IHTTPResponse> http_response_impl) :
+	HTTPClientSessionImpl(const std::string& host, 
+		std::unique_ptr<IHTTPResponse> http_response_impl = std::make_unique<HTTPResponseImpl>()
+	) :
 		session{ Poco::Net::HTTPClientSession{ host } },
 		http_response_ { std::move(http_response_impl)}
 		{};

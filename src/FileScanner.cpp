@@ -9,15 +9,10 @@
 #include <streambuf>
 #include <exception>
 
-namespace {
-	constexpr auto API_SCAN_POSTFIX = "/api/scan/v1";
-	constexpr auto API_POLL_POSTFIX = "/api/poll/v1";
-}
-
 FileScanner::FileScanner(const std::string& scanning_address, Authenticator &authenticator)
 	: base_URI { Poco::URI(scanning_address)},
-	scan_endpoint{ Poco::URI(scanning_address + API_SCAN_POSTFIX) },
-	poll_endpoint{ Poco::URI(scanning_address + API_POLL_POSTFIX) },
+	scan_endpoint{ Poco::URI(scanning_address + filescanner::API_SCAN_POSTFIX) },
+	poll_endpoint{ Poco::URI(scanning_address + filescanner::API_POLL_POSTFIX) },
 	authenticator{ authenticator }
 {
 	refreshToken();

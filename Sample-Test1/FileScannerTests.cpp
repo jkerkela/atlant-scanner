@@ -16,7 +16,7 @@ using ::testing::StrEq;
 
 TEST(FileScanner, TestConstructorWithNonAccessibleAuthAddress) {
 	Authenticator authenticator{ 
-		std::make_unique<AuthTokenFetcher>("auth_address", std::make_unique<HTTPClientSessionImpl>("auth_address", std::make_unique<HTTPResponseImpl>())), 
+		std::make_unique<AuthTokenFetcher>("auth_address", std::make_unique<HTTPClientSessionImpl>("auth_address")), 
 		"client_ID", 
 		"client_secret", 
 		std::set<std::string>{ "scope1" }
@@ -28,7 +28,8 @@ class TestFileScannerWithMockedAuthResponse : public ::testing::Test
 {
 protected:
 
-	FileScanner* file_scanner;
+	FileScanner* file_scanner = nullptr;
+	std::string test_scan_address = "scan_uri";
 	std::unique_ptr<MockHTTPClientSessionImpl> mock_client_session_for_auth;
 	std::unique_ptr<MockHTTPClientSessionImpl> mock_client_session_for_scan;
 	std::unique_ptr<HTTPResponseImpl> mock_http_response;
@@ -78,7 +79,7 @@ protected:
 			"client_secret",
 			std::set<std::string>{ "scope1" }
 		};
-		file_scanner = new FileScanner("some_scannig_address", authenticator);
+		file_scanner = new FileScanner(test_scan_address, authenticator);
 	}
 	
 	void TearDown() override 
@@ -88,6 +89,20 @@ protected:
 
 };
 
+TEST_F(TestFileScannerWithMockedAuthResponse, TestgetAddress) {
+	//PRE: initialize expected address
+	auto expected_address = test_scan_address;
+
+	//VERIFY: Verify that can adress is expected
+	EXPECT_EQ(file_scanner->getAddress(), test_scan_address);
+}
+TEST_F(TestFileScannerWithMockedAuthResponse, TestgetScanAddress) {
+	//PRE: initialize expected address
+	auto expected_address = test_scan_address + filescanner::API_SCAN_POSTFIX;
+
+	//VERIFY: Verify that can adress is expected
+	EXPECT_EQ(file_scanner->getScanAddress(), expected_address);
+}
 TEST_F(TestFileScannerWithMockedAuthResponse, TestpollWithValidResponseJSON) {
 
 	//PRE: mock client session, sendRequest, receiveResponse for file scanning

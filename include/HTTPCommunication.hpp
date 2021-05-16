@@ -9,7 +9,7 @@ class IHTTPRequest
 {
 public:
 	virtual void setContentType(const std::string& media_type) = 0;
-	virtual void setContentLength(std::streamsize length) = 0;
+	virtual void setContentLength(const std::streamsize& length) = 0;
 	virtual void setBody(const std::string& request_body) = 0;
 	virtual void set(const std::string& name, const std::string& value) = 0;
 	virtual Poco::Net::HTTPRequest getRequest() = 0;

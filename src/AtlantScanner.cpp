@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
 	std::set<std::string> auth_scope{ "scan" };
 	std::string auth_address{ "commandLine.getAuthorizationAddress" };
 	Authenticator authenticator{
-		std::make_unique<AuthTokenFetcher>(auth_address, std::make_unique<HTTPClientSessionImpl>(auth_address, std::make_unique<HTTPResponseImpl>())),
+		std::make_unique<AuthTokenFetcher>(auth_address, std::make_unique<HTTPClientSessionImpl>(auth_address)),
 		std::string("commandLine.getClientID"),
 		std::string("commandLine.getClientSecret"),
 		auth_scope};

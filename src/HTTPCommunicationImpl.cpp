@@ -5,7 +5,7 @@ void HTTPRequestImpl::setContentType(const std::string& media_type)
 	getRequest().setContentType(media_type);
 }
 
-void HTTPRequestImpl::setContentLength(std::streamsize length)
+void HTTPRequestImpl::setContentLength(const std::streamsize& length)
 {
 	getRequest().setContentLength(length);
 }
