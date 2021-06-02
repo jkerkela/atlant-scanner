@@ -140,6 +140,7 @@
     <ClCompile Include="src\HTTPCommunicationImpl.cpp" />
     <ClCompile Include="src\JSONHandlerImpl.cpp" />
     <ClCompile Include="src\MultipartRequestBuilder.cpp" />
+    <ClCompile Include="src\ResultPrinter.cpp" />
     <ClCompile Include="src\ScanMetadata.cpp" />
     <ClCompile Include="src\ScanPoller.cpp" />
     <ClCompile Include="src\ScanSettings.cpp" />
@@ -615,6 +616,7 @@
     <ClInclude Include="include\JSONHandler.hpp" />
     <ClInclude Include="include\JSONHandlerImpl.hpp" />
     <ClInclude Include="include\MultipartRequestBuilder.hpp" />
+    <ClInclude Include="include\ResultPrinter.hpp" />
     <ClInclude Include="include\ScanMetadata.hpp" />
     <ClInclude Include="include\ScanPoller.hpp" />
     <ClInclude Include="include\ScanResult.hpp" />

@@ -176,7 +176,7 @@ TEST_F(TestScanPollerWithMockedAuthResponse, TestscanWithCompleteResult) {
 
 	//VERIFY: verify that result
 	Detection expected_detection {Detection::Category::SUSPICIOUS, std::string("detection1"), std::string("member1")};
-	ScanResult expected_scan_result{ ScanResult::Status::COMPLETE, ScanResult::Result::SUSPICIOUS, std::list<Detection>{expected_detection} };
+	ScanResult expected_scan_result{ ScanResult::Status::COMPLETE, ScanResult::Result::SUSPICIOUS, std::vector<Detection>{expected_detection} };
 	EXPECT_EQ(scan_result.getResult(), expected_scan_result.getResult());
 	EXPECT_EQ(scan_result.getStatus(), expected_scan_result.getStatus());
 	EXPECT_EQ(detection_result.getCategory(), expected_detection.getCategory());
@@ -233,7 +233,7 @@ TEST_F(TestScanPollerWithMockedAuthResponse, TestscanWithPendingToCompleteResult
 
 	//VERIFY: verify that result
 	Detection expected_detection{ Detection::Category::SUSPICIOUS, std::string("detection1"), std::string("member1") };
-	ScanResult expected_scan_result{ ScanResult::Status::COMPLETE, ScanResult::Result::SUSPICIOUS, std::list<Detection>{expected_detection} };
+	ScanResult expected_scan_result{ ScanResult::Status::COMPLETE, ScanResult::Result::SUSPICIOUS, std::vector<Detection>{expected_detection} };
 	EXPECT_EQ(scan_result.getResult(), expected_scan_result.getResult());
 	EXPECT_EQ(scan_result.getStatus(), expected_scan_result.getStatus());
 	EXPECT_EQ(detection_result.getCategory(), expected_detection.getCategory());

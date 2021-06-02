@@ -8,6 +8,7 @@
 #include <string>
 #include <set>
 #include <memory>
+#include <vector>
 
 using ::testing::_;
 using ::testing::AnyNumber;
@@ -142,7 +143,7 @@ TEST_F(TestFileScannerWithMockedAuthResponse, TestpollWithValidResponseJSON) {
 
 	//VERIFY: Verify that poll result is expected
 	Detection expected_detection{ Detection::Category::SUSPICIOUS, std::string("detection1"), std::string("member1") };
-	ScanResult expected_scan_result{ ScanResult::Status::COMPLETE, ScanResult::Result::SUSPICIOUS, std::list<Detection>{expected_detection} };
+	ScanResult expected_scan_result{ ScanResult::Status::COMPLETE, ScanResult::Result::SUSPICIOUS, std::vector<Detection>{expected_detection} };
 
 	EXPECT_EQ(poll_result.getResult(), expected_scan_result.getResult());
 	EXPECT_EQ(poll_result.getStatus(), expected_scan_result.getStatus());
@@ -181,7 +182,7 @@ TEST_F(TestFileScannerWithMockedAuthResponse, TestpollWithScanStatusPending) {
 	auto poll_result = file_scanner->poll(std::string("poll_uri"));
 
 	//VERIFY: Verify that poll result is expected
-	ScanResult expected_scan_result{ ScanResult::Status::PENDING, ScanResult::Result::CLEAN, std::list<Detection>{},  100};
+	ScanResult expected_scan_result{ ScanResult::Status::PENDING, ScanResult::Result::CLEAN, std::vector<Detection>{},  100};
 
 	EXPECT_EQ(poll_result.getStatus(), expected_scan_result.getStatus());
 	EXPECT_EQ(poll_result.getRetryAfter(), expected_scan_result.getRetryAfter());
@@ -219,7 +220,7 @@ TEST_F(TestFileScannerWithMockedAuthResponse, TestscanWithValidResponseJSON) {
 
 	//VERIFY: Verify that scan result is expected
 	Detection expected_detection{ Detection::Category::SUSPICIOUS, std::string("detection1"), std::string("member1") };
-	ScanResult expected_scan_result{ ScanResult::Status::COMPLETE, ScanResult::Result::SUSPICIOUS, std::list<Detection>{expected_detection} };
+	ScanResult expected_scan_result{ ScanResult::Status::COMPLETE, ScanResult::Result::SUSPICIOUS, std::vector<Detection>{expected_detection} };
 
 	EXPECT_EQ(scan_result.getResult(), expected_scan_result.getResult());
 	EXPECT_EQ(scan_result.getStatus(), expected_scan_result.getStatus());
@@ -251,7 +252,7 @@ TEST_F(TestFileScannerWithMockedAuthResponse, TestscanWithHTTP_PROCESSINGRespons
 	auto scan_result = file_scanner->scan(scan_metadata, std::ifstream(file_to_scan));
 	
 	//VERIFY: Verify that poll result is expected
-	ScanResult expected_scan_result{ ScanResult::Status::PENDING, ScanResult::Result::CLEAN, std::list<Detection>{},  100, "poll_uri" };
+	ScanResult expected_scan_result{ ScanResult::Status::PENDING, ScanResult::Result::CLEAN, std::vector<Detection>{},  100, "poll_uri" };
 
 	EXPECT_EQ(scan_result.getRetryAfter(), expected_scan_result.getRetryAfter());
 	EXPECT_EQ(scan_result.getPollURL(), expected_scan_result.getPollURL());

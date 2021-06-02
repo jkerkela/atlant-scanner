@@ -48,6 +48,9 @@
     <ClCompile Include="src\JSONHandlerImpl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\ResultPrinter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Authenticator.hpp">
@@ -1470,6 +1473,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\JSONHandler.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ResultPrinter.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -8,6 +8,7 @@
 #include <fstream>
 #include <streambuf>
 #include <exception>
+#include <vector>
 
 FileScanner::FileScanner(std::unique_ptr<IHTTPClientSession> http_client_session_impl,
 	const std::string& scanning_address,
@@ -209,7 +210,7 @@ ScanResult FileScanner::deserializeScanResponse(std::istream& response)
 		throw APIException("Invalid scan result category");
 	}
 
-	std::list<Detection> detections{};
+	std::vector<Detection> detections{};
 	auto detections_array = top_level_handler.getArray("detections");
 	for (auto const detection_item : detections_array) {
 		auto detection = buildDetection(detection_item);

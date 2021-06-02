@@ -19,9 +19,7 @@ public:
 		: category{ category }, name{ name }, member_name{ member_name } {};
 
 	Category getCategory() { return category;  };
-
 	std::string getName() { return name; };
-
 	std::optional<std::string> getMemberName() { return member_name; };
 
 private:

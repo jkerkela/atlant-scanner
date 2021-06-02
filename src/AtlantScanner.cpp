@@ -3,12 +3,12 @@
 #include <set>
 #include <exception>
 #include <stdlib.h>
-#include <optional>
 
 #include "Authenticator.hpp"
 #include "ScanMetadata.hpp"
 #include "FileScanner.hpp"
 #include "ScanPoller.hpp"
+#include "ResultPrinter.hpp"
 
 int main(int argc, char* argv[])
 {
@@ -36,8 +36,8 @@ int main(int argc, char* argv[])
 		FileScanner fileScanner{ std::make_unique<HTTPClientSessionImpl>(scan_address), scan_address, authenticator};
 		ScanPoller scanPoller{fileScanner};
 		auto result = scanPoller.scan(metadata, input_file);
-		//TODO: implement result printer as:
-		//https://github.com/F-Secure/atlant-api/blob/9bfac23491f555fceea7485fe9bf4edb35485893/java/scanner/src/main/com/fsecure/atlant/examples/scanner/AtlantScannerRunner.java#L31
+
+		ResultPrinter::print(result);
 	}
 	catch (std::exception e) {
 		std::cerr << "Error: " << e.what() << std::endl;
