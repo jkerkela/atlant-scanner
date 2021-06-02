@@ -21,14 +21,16 @@ namespace filescanner {
 class FileScanner {
 
 public:
-	FileScanner(const std::string &scanning_address, Authenticator &authenticator);
+	FileScanner(std::unique_ptr<IHTTPClientSession> http_client_session_impl,
+		const std::string &scanning_address, Authenticator &authenticator);
 	void refreshToken();
-	ScanResult scan(ScanMetadata &metadata, std::ifstream &input, std::unique_ptr<IHTTPClientSession> client);
-	ScanResult poll(std::unique_ptr<IHTTPClientSession> client, const std::string &poll_URL);
+	ScanResult scan(ScanMetadata &metadata, std::ifstream &input);
+	ScanResult poll(const std::string &poll_URL);
 	Poco::URI getScanAddress() { return scan_endpoint; };
 	Poco::URI getAddress() { return base_URI; };
 
 private:
+	std::unique_ptr<IHTTPClientSession> client;
 	Poco::URI base_URI;
 	Poco::URI scan_endpoint;
 	Poco::URI poll_endpoint;
@@ -38,8 +40,8 @@ private:
 	HTTPRequestImpl buildScanRequest(ScanMetadata &metadata, std::ifstream &input);
 	HTTPRequestImpl buildPollRequest(const std::string& poll_URL);
 	std::string serializeScanMetadata(ScanMetadata &metadata);
-	ScanResult processScanResponse(std::unique_ptr<IHTTPClientSession> client);
-	ScanResult processPollResponse(std::unique_ptr<IHTTPClientSession> client);
+	ScanResult processScanResponse();
+	ScanResult processPollResponse();
 	ScanResult deserializeScanResponse(std::istream &response);
 	Detection buildDetection(const std::string& detection_item_json);
 };

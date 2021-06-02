@@ -9,8 +9,11 @@
 #include <streambuf>
 #include <exception>
 
-FileScanner::FileScanner(const std::string& scanning_address, Authenticator &authenticator)
-	: base_URI { Poco::URI(scanning_address)},
+FileScanner::FileScanner(std::unique_ptr<IHTTPClientSession> http_client_session_impl,
+	const std::string& scanning_address,
+	Authenticator &authenticator) : 
+	client { std::move(http_client_session_impl)},
+	base_URI { Poco::URI(scanning_address)},
 	scan_endpoint{ Poco::URI(scanning_address + filescanner::API_SCAN_POSTFIX) },
 	poll_endpoint{ Poco::URI(scanning_address + filescanner::API_POLL_POSTFIX) },
 	authenticator{ authenticator }
@@ -23,19 +26,19 @@ void FileScanner::refreshToken()
 	auth_token = authenticator.fetchToken();
 }
 
-ScanResult FileScanner::scan(ScanMetadata &metadata, std::ifstream& input, std::unique_ptr<IHTTPClientSession> client)
+ScanResult FileScanner::scan(ScanMetadata &metadata, std::ifstream& input)
 {
 	HTTPRequestImpl scan_request = buildScanRequest(metadata, input);
 	client->sendRequest(scan_request);
 
-	return processScanResponse(std::move(client));
+	return processScanResponse();
 }
 
-ScanResult FileScanner::poll(std::unique_ptr<IHTTPClientSession> client, const std::string &poll_URI)
+ScanResult FileScanner::poll(const std::string &poll_URI)
 {
 	auto poll_req = buildPollRequest(poll_URI);
 	client->sendRequest(poll_req);
-	return processPollResponse(std::move(client));
+	return processPollResponse();
 }
 
 HTTPRequestImpl FileScanner::buildScanRequest(ScanMetadata &metadata, std::ifstream& input)
@@ -63,7 +66,7 @@ HTTPRequestImpl FileScanner::buildPollRequest(const std::string &poll_URL)
 	return req;
 }
 
-ScanResult FileScanner::processScanResponse(std::unique_ptr<IHTTPClientSession> client)
+ScanResult FileScanner::processScanResponse()
 {
 	ScanResult scan_result{};
 	std::istream& res_stream = client->receiveResponse();
@@ -104,7 +107,7 @@ ScanResult FileScanner::processScanResponse(std::unique_ptr<IHTTPClientSession> 
 	return scan_result;
 }
 
-ScanResult FileScanner::processPollResponse(std::unique_ptr<IHTTPClientSession> client) {
+ScanResult FileScanner::processPollResponse() {
 	ScanResult scan_result{};
 	std::istream& res_stream = client->receiveResponse();
 	auto status_code = client->getResponseStatus();
@@ -167,6 +170,7 @@ Detection FileScanner::buildDetection(const std::string& detection_item_json)
 
 ScanResult FileScanner::deserializeScanResponse(std::istream& response)
 {
+	//TODO: The stream is invalid here for poll result
 	JSONHandlerImpl top_level_handler{ response };
 	auto scan_status = top_level_handler.getStringValue("status");
 

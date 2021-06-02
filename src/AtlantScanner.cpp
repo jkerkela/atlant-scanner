@@ -28,7 +28,8 @@ int main(int argc, char* argv[])
 	ScanMetadata metadata{};
 
 	try {
-		FileScanner fileScanner{std::string("commandLine.getScanAddress"), authenticator};
+		std::string scan_address = "commandLine.getScanAddress";
+		FileScanner fileScanner{ std::make_unique<HTTPClientSessionImpl>(scan_address), scan_address, authenticator};
 		ScanPoller scanPoller{fileScanner};
 		std::string file{"commandLine.getInputFile"};
 		auto result = scanPoller.scan(metadata, file);
