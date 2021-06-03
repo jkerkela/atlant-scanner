@@ -15,7 +15,7 @@ void ResultPrinter::print(const ScanResult& scan_result)
 			std::string detection_item = "Name: " + detection.getName()
 				+ " Category: " + categoryToString(detection.getCategory());
 			if (detection.getMemberName().has_value()) {
-				detection_item + std::string(" Member name: ") + detection.getMemberName().value();
+				detection_item += " Member name: " + detection.getMemberName().value();
 			}
 			std::cout << detection_item << std::endl;
 		}
