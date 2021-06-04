@@ -9,7 +9,7 @@
 class ResultPrinter
 {
 public:
-	static void print(const ScanResult& scan_result);
+	static void print(ScanResult& scan_result);
 
 private:
 	static std::string resultToString(const ScanResult::Result& result);

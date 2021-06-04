@@ -4,6 +4,10 @@
 #include<vector>
 #include<string>
 
+namespace requestBuilder {
+	constexpr int BOUNDARY_BYTES = 32;
+}
+
 class MultiPartRequestBuilder {
 
 public:

@@ -15,6 +15,17 @@
 
 using namespace Poco::Net;
 
+namespace authTokenFetcher{
+	constexpr auto AUDIENCE = "f-secure-atlant";
+	constexpr auto API_PREFIX = "/api/poll/v1";
+	constexpr auto JSON_GRANT_TYPE_KEY = "grant_type";
+	constexpr auto JSON_GRANT_TYPE_VALUE = "grant_type";
+	constexpr auto JSON_CLIENT_ID_KEY = "client_id";
+	constexpr auto JSON_CLIENT_SECRET_KEY = "client_secret";
+	constexpr auto JSON_AUDIENCE_KEY = "client_secret";
+	constexpr auto JSON_SCOPE_KEY = "scope";
+}
+
 class AuthTokenFetcher {
 
 public:

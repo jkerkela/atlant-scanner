@@ -5,10 +5,11 @@
 
 #include "APIException.hpp"
 
-void ResultPrinter::print(const ScanResult& scan_result)
+void ResultPrinter::print(ScanResult& scan_result)
 {
-	std::cout << "Result: " + resultToString(scan_result.getResult()) << std::endl;
-	std::vector<Detection> detections = scan_result.getDetections();
+	const auto result = scan_result.getResult();
+	std::cout << "Result: " + resultToString(result) << std::endl;
+	const std::vector<Detection> detections = scan_result.getDetections();
 	if (!detections.empty()) {
 		std::cout << "Detections: " << std::endl;
 		for (auto detection : detections) {

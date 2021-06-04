@@ -12,20 +12,8 @@
 #include <Poco/JSON/Parser.h>
 #include <Poco/JSON/JSONException.h>
 
-
-namespace {
-	constexpr auto AUDIENCE = "f-secure-atlant";
-	constexpr auto API_PREFIX = "/api/poll/v1";
-	constexpr auto JSON_GRANT_TYPE_KEY = "grant_type";
-	constexpr auto JSON_GRANT_TYPE_VALUE = "grant_type";
-	constexpr auto JSON_CLIENT_ID_KEY = "client_id";
-	constexpr auto JSON_CLIENT_SECRET_KEY = "client_secret";
-	constexpr auto JSON_AUDIENCE_KEY = "client_secret";
-	constexpr auto JSON_SCOPE_KEY = "scope";
-}
-
 AuthTokenFetcher::AuthTokenFetcher(const std::string &authorization_address, std::unique_ptr<IHTTPClientSession> client)
-	: token_endpoint{ Poco::URI(authorization_address + std::string(API_PREFIX)) },
+	: token_endpoint{ Poco::URI(authorization_address + std::string(authTokenFetcher::API_PREFIX)) },
 	client { std::move(client) }
 {}
 
@@ -49,13 +37,13 @@ AuthToken AuthTokenFetcher::fetch(
 HTTPRequestImpl AuthTokenFetcher::buildTokenRequest(const std::string &client_ID, const std::string &client_secret, const std::set<std::string> &scopes)
 {
 	std::unordered_map<std::string, std::string> params;
-	params.insert({ std::string(JSON_GRANT_TYPE_KEY), std::string(JSON_GRANT_TYPE_VALUE) });
-	params.insert({ std::string(JSON_CLIENT_ID_KEY), client_ID });
-	params.insert({ std::string(JSON_CLIENT_SECRET_KEY), client_secret });
-	params.insert({ std::string(JSON_AUDIENCE_KEY), std::string(AUDIENCE) });
+	params.insert({ std::string(authTokenFetcher::JSON_GRANT_TYPE_KEY), std::string(authTokenFetcher::JSON_GRANT_TYPE_VALUE) });
+	params.insert({ std::string(authTokenFetcher::JSON_CLIENT_ID_KEY), client_ID });
+	params.insert({ std::string(authTokenFetcher::JSON_CLIENT_SECRET_KEY), client_secret });
+	params.insert({ std::string(authTokenFetcher::JSON_AUDIENCE_KEY), std::string(authTokenFetcher::AUDIENCE) });
 
 	if (!scopes.empty()) {
-		params.insert({ std::string(JSON_SCOPE_KEY), encodeScopes(scopes) });
+		params.insert({ std::string(authTokenFetcher::JSON_SCOPE_KEY), encodeScopes(scopes) });
 	}
 
 	auto request_body =

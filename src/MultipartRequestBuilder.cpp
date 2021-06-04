@@ -6,19 +6,14 @@
 
 #include <Poco/UTF8Encoding.h>
 
-namespace {
-	constexpr int BOUNDARY_BYTES = 32;
-}
-
 MultiPartRequestBuilder::MultiPartRequestBuilder()
 {
 	parts = std::vector<Part>{};
 	boundary = makeBoundary();
 }
 
-void MultiPartRequestBuilder::addPart(const Part &part)
+void MultiPartRequestBuilder::addPart(const MultiPartRequestBuilder::Part &part)
 {
-	//TODO: ok to not return MultiPartRequestBuilder object?
 	parts.emplace_back(part);
 }
 
@@ -36,7 +31,7 @@ std::string encodeToUTF8(std::string to_encode)
 std::string MultiPartRequestBuilder::encode()
 {
 	std::string result;
-	auto initiator = encodeToUTF8(std::string("--" + boundary));
+	auto initiator = encodeToUTF8(std::string("--" + boundary + "\r\n"));
 	auto separator = encodeToUTF8(std::string("\r\n--" + boundary + "\r\n"));
 	auto terminator = encodeToUTF8(std::string("\r\n--" + boundary + "--\r\n"));
 
@@ -55,12 +50,11 @@ using random_bytes_engine = std::independent_bits_engine<std::default_random_eng
 std::string MultiPartRequestBuilder::makeBoundary()
 {
 	random_bytes_engine rbe;
-	std::vector<int> data(BOUNDARY_BYTES);
+	std::vector<int> data(requestBuilder::BOUNDARY_BYTES);
 	std::generate(begin(data), end(data), std::ref(rbe));
 
 	std::string result = "Boundary";
 
-	//TODO: do we get correct boundary here?
 	for (auto const item : data) {
 		result += std::to_string(item);
 	}

@@ -32,9 +32,9 @@ public:
 		const std::optional<std::string> poll_URL = std::nullopt)
 		: status{ status }, result{ result }, detections{ detections }, retry_after{ retry_after }, poll_URL{ poll_URL } {};
 
-	const Status& getStatus() const { return status; };
-	const Result& getResult() const { return result; };
-	const std::vector<Detection>& getDetections() const { return detections; };
+	Status getStatus() { return status; };
+	Result getResult() { return result; };
+	std::vector<Detection> getDetections() { return detections; };
 	std::optional<std::string> getPollURL() { return poll_URL; };
 	std::optional<int> getRetryAfter() { return retry_after; };
 	void setPollURL(const std::string& poll_url) { poll_URL = poll_url; };
