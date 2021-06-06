@@ -171,7 +171,6 @@ Detection FileScanner::buildDetection(const std::string& detection_item_json)
 
 ScanResult FileScanner::deserializeScanResponse(std::istream& response)
 {
-	//TODO: The stream is invalid here for poll result
 	JSONHandlerImpl top_level_handler{ response };
 	auto scan_status = top_level_handler.getStringValue("status");
 
