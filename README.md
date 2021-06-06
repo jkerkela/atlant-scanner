@@ -5,9 +5,7 @@ C++ example implementation for F-Secure Atlant API file scanning (https://help.f
 
 ## Integration
 Project is build as VS solution. Project uses C++ 17.
-- NOTE: Implementation is not tested with live server (see: Things to do).
-- NOTE: The libary linking is not complete, all dependency libraries needs to be used from external/libs (see: Things to do). 
-Currently linking problem is circumnvented by adding requried libs (PocoJSONd.dll, PocoNetd.dll, PocoFoundationd.dll) manually to output folder.
+- NOTE: Implementation is not tested with live server.
 
 3rd party dependencies:
   - POCO
@@ -16,8 +14,8 @@ Currently linking problem is circumnvented by adding requried libs (PocoJSONd.dl
   - Gtest
      - Check reference https://docs.microsoft.com/en-us/visualstudio/test/how-to-use-google-test-for-cpp?view=vs-2019
   - Gmock
+  
+Project supports building with:
+  - CMake
+  - MSVC solution (Visual Studio solution)
 
-## Things to do:
-  - Finalize implementation: (see //TODO items on sources)
-	- Fix libary linking / VS project configs
-	- Add cmake build support
